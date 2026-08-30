@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard | PrepElite</title>
+    <!-- Custom Favicon - Golden Crown & Graduation Cap -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A1928'/%3E%3Cpath fill='%23D4AF37' d='M25 50 L32 68 L50 48 L68 68 L75 50 L70 78 L30 78 Z'/%3E%3Ccircle cx='25' cy='48' r='3' fill='%23FFD700'/%3E%3Ccircle cx='50' cy='46' r='4' fill='%23FFD700'/%3E%3Ccircle cx='75' cy='48' r='3' fill='%23FFD700'/%3E%3Cpath fill='%23FFD700' d='M50 18 L82 32 L50 44 L18 32 Z'/%3E%3Cpath fill='%23B4942C' d='M34 38 L34 52 C34 52 42 58 50 58 C58 58 66 52 66 52 L66 38'/%3E%3Cpath stroke='%23FFD700' stroke-width='3' fill='none' stroke-linecap='round' d='M78 33 L78 52'/%3E%3Ccircle cx='78' cy='54' r='3' fill='%23D4AF37'/%3E%3C/svg%3E">
+    
+    <!-- Tailwind + Config -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-navy': '#0A1928',
+                        'secondary-charcoal': '#1E2A36',
+                        'accent-gold': '#D4AF37',
+                        'accent-gold-dark': '#B4942C',
+                        'neutral-dark': '#0F1A24',
+                        'neutral-light': '#F5F7FA',
+                        'dark-bg': '#000000',
+                        'dark-card': '#1A1A1A'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Lexend', 'Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } }
+                    },
+                    backgroundImage: {
+                        'exam-pattern': "radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 60%)",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === Base Styles (same as reference) === */
+        body {
+            background-color: #F5F7FA;
+            color: #1E2A36;
+            scroll-behavior: smooth;
+        }
+        .dark body {
+            background-color: #000000;
+            color: #E5E7EB;
+        }
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: #E5E7EB; }
+        body::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #B4942C 100%);
+            color: #0A1928;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+        }
+        .btn-outline-gold {
+            border: 1.5px solid #D4AF37;
+            color: #D4AF37;
+            background: transparent;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-outline-gold:hover {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        .nav-item:hover::after,
+        .nav-item.active::after { width: 100%; }
+        .nav-item.active {
+            color: #D4AF37 !important;
+            font-weight: 600;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #E5E7EB;
+        }
+        .dark .dropdown-menu {
+            background: #1A1A1A;
+            border-color: #2D3A46;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #1E2A36;
+            transition: all 0.2s;
+        }
+        .dark .dropdown-item { color: #E5E7EB; }
+        .dropdown-item:hover {
+            background: #F3F4F6;
+            color: #D4AF37;
+            padding-left: 1.75rem;
+        }
+        .dark .dropdown-item:hover { background: #2D3A46; }
+
+        .auth-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .auth-btn.login {
+            background: transparent;
+            border-color: #D1D5DB;
+            color: #1E2A36;
+        }
+        .dark .auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .auth-btn.login:hover { border-color: #D4AF37; color: #D4AF37; }
+        .auth-btn.signup {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+        .auth-btn.signup:hover { background: #B4942C; transform: translateY(-2px); }
+
+        .toggle-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .toggle-btn { background: #2D3A46; color: #9CA3AF; }
+        .toggle-btn:hover { background: #E5E7EB; color: #D4AF37; }
+        .dark .toggle-btn:hover { background: #3B4A58; color: #D4AF37; }
+        .toggle-btn.active { background: #D4AF37; color: white; }
+
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .dark .mobile-menu { background: #000000; border-color: #2D3A46; }
+        .mobile-menu.open {
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .mobile-menu.open::-webkit-scrollbar { display: none; }
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: #1E2A36;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.2s ease;
+        }
+        .dark .mobile-menu-item { color: #D1D5DB; border-bottom-color: #2D3A46; }
+        .mobile-menu-item:hover { background-color: #F9FAFB; color: #D4AF37; }
+        .dark .mobile-menu-item:hover { background-color: #1A1A1A; }
+
+        .mobile-auth-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0.25rem;
+            border: 1px solid transparent;
+        }
+        .mobile-auth-btn.login {
+            background: transparent;
+            border-color: #D1D5DB;
+            color: #1E2A36;
+        }
+        .dark .mobile-auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .mobile-auth-btn.login:hover { background-color: #D4AF37; color: white; border-color: #D4AF37; }
+        .mobile-auth-btn.signup { background: #D4AF37; color: #0A1928; }
+        .mobile-auth-btn.signup:hover { background: #B4942C; }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-dropdown-content.show { max-height: 300px; }
+        .mobile-dropdown-item {
+            display: block;
+            padding: 0.75rem 2.5rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #F9FAFB;
+        }
+        .dark .mobile-dropdown-item { color: #9CA3AF; border-bottom-color: #2D3A46; }
+        .mobile-dropdown-item:hover { color: #D4AF37; background-color: #F9FAFB; }
+        .dark .mobile-dropdown-item:hover { background-color: #1A1A1A; }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            color: #1E2A36;
+            transition: all 0.3s ease;
+        }
+        .dark .social-icon { background: #2D3A46; color: #E5E7EB; }
+        .social-icon:hover { background: #D4AF37; color: white; transform: translateY(-3px); }
+
+        .desktop-nav-container { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-spacing { display: flex; align-items: center; gap: 1.25rem; }
+
+        /* Dashboard specific styles */
+        .dashboard-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+        .dark .dashboard-card {
+            background: #1A1A1A;
+            border-color: rgba(212, 175, 55, 0.1);
+        }
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #D4AF37;
+            line-height: 1;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .dark .progress-bar { background: #2D3A46; }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #D4AF37, #B4942C);
+            transition: width 0.8s ease;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-completed { background: #D1FAE5; color: #065F46; }
+        .badge-pending { background: #FEF3C7; color: #92400E; }
+        .badge-upcoming { background: #DBEAFE; color: #1E40AF; }
+        .dark .badge-completed { background: #064E3B; color: #A7F3D0; }
+        .dark .badge-pending { background: #78350F; color: #FDE68A; }
+        .dark .badge-upcoming { background: #1E3A5F; color: #93C5FD; }
+
+        .topic-tag {
+            display: inline-block;
+            padding: 0.15rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: rgba(212, 175, 55, 0.1);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .dark .topic-tag { background: rgba(212, 175, 55, 0.12); }
+
+        .score-ring {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4AF37;
+            border: 4px solid #D4AF37;
+            position: relative;
+        }
+        .score-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: #D4AF37;
+            border-right-color: #D4AF37;
+            opacity: 0.3;
+        }
+        .score-ring.ring-good { border-color: #10B981; color: #10B981; }
+        .score-ring.ring-medium { border-color: #F59E0B; color: #F59E0B; }
+        .score-ring.ring-low { border-color: #EF4444; color: #EF4444; }
+
+        /* Mobile header & sidebar styles */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E5E5E5;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dark .mobile-header { background: #000000; border-bottom-color: #2D3A46; }
+        @media (max-width: 1024px) { .mobile-header { display: flex; } }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 260px;
+            background: white;
+            border-right: 1px solid #E5E5E5;
+            transition: transform 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+        .dark .sidebar { background: #000000; border-right-color: #2D3A46; }
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            display: none;
+        }
+        .sidebar-overlay.open { display: block; }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1.5rem;
+            margin: 0.15rem 0.75rem;
+            border-radius: 12px;
+            color: #6B7280;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .dark .sidebar-item { color: #9CA3AF; }
+        .sidebar-item:hover { background: #F3F4F6; color: #1E2A36; }
+        .dark .sidebar-item:hover { background: #1A1A1A; color: #E5E7EB; }
+        .sidebar-item.active {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+        .dark .sidebar-item.active { background: #D4AF37; color: #0A1928; }
+        .sidebar-item i { width: 22px; font-size: 1rem; }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+        @media (max-width: 1024px) {
+            .main-content { margin-left: 0; padding-top: 70px; padding-left: 1rem; padding-right: 1rem; }
+        }
+
+        .top-header {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #E5E7EB;
+        }
+        .dark .top-header { background: #1A1A1A; border-color: #2D3A46; }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+    </style>
+</head>
+<body class="exam-pattern">
+
+<!-- ===== MOBILE HEADER ===== -->
+<div class="mobile-header">
+    <div class="flex items-center gap-3">
+        <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+        <a class="flex items-center space-x-2 group" href="index.html">
+            <div class="w-9 h-9 bg-accent-gold rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <i class="fas fa-graduation-cap text-primary-navy text-sm"></i>
+            </div>
+            <div>
+                <span class="text-xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">PREPELITE</span>
+            </div>
+        </a>
+    </div>
+    <div class="flex items-center gap-2">
+        <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+        <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+        <img src="assets/s1.jpg" alt="Rahul Kumar" class="w-8 h-8 rounded-full object-cover border-2 border-accent-gold shadow-sm ml-1">
+    </div>
+</div>
+
+<!-- ===== SIDEBAR OVERLAY ===== -->
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+    <div class="p-5 border-b border-neutral-light dark:border-gray-800">
+        <a class="flex items-center space-x-3 group" href="index.html">
+            <div class="w-10 h-10 bg-accent-gold rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <i class="fas fa-graduation-cap text-primary-navy text-lg"></i>
+            </div>
+            <div>
+                <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">PREPELITE</span>
+            </div>
+        </a>
+        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Student Dashboard</p>
+    </div>
+    <nav class="py-3">
+        <div class="sidebar-item active" data-section="overview"><i class="fas fa-tachometer-alt"></i><span>Overview</span></div>
+        <div class="sidebar-item" data-section="tests"><i class="fas fa-pencil-alt"></i><span>Mock Tests</span></div>
+        <div class="sidebar-item" data-section="reports"><i class="fas fa-chart-bar"></i><span>Score Reports</span></div>
+        <div class="sidebar-item" data-section="topics"><i class="fas fa-layer-group"></i><span> Progress</span></div>
+        <div class="sidebar-item" data-section="materials"><i class="fas fa-download"></i><span>Study Materials</span></div>
+        <div class="sidebar-item" data-section="schedule"><i class="fas fa-calendar-alt"></i><span>Schedule</span></div>
+    </nav>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-neutral-light dark:border-gray-800">
+        <a href="login.html" class="flex items-center justify-center gap-2 w-full p-2.5 rounded-xl bg-neutral-light dark:bg-gray-800 hover:bg-accent-gold dark:hover:bg-accent-gold transition font-semibold text-sm text-neutral-dark dark:text-gray-200 hover:text-white dark:hover:text-white border border-neutral-light dark:border-gray-700">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+    <!-- Top Header -->
+    <div class="top-header flex justify-between items-center flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-display font-bold" id="page-title">Dashboard</h1>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400" id="page-subtitle">Welcome back, Rahul</p>
+        </div>
+        <div class="hidden lg:flex items-center gap-4">
+            <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+            <div class="flex items-center gap-3 border-l border-neutral-light dark:border-gray-800 pl-4">
+                <img src="assets/s1.jpg" alt="Rahul Kumar" class="w-10 h-10 rounded-full object-cover border-2 border-accent-gold shadow-sm">
+                <div class="text-left hidden lg:block">
+                    <p class="text-sm font-bold text-neutral-dark dark:text-white leading-tight">Rahul Kumar</p>
+                    <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== OVERVIEW SECTION ===== -->
+    <div id="section-overview" class="page-section active">
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Tests Attempted</p>
+                        <p class="stat-number">12</p>
+                    </div>
+                    <div class="w-10 h-10 bg-accent-gold/10 rounded-full flex items-center justify-center"><i class="fas fa-pencil-alt text-accent-gold"></i></div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Avg. Score</p>
+                        <p class="stat-number">78%</p>
+                    </div>
+                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center"><i class="fas fa-check-circle text-green-600 dark:text-green-400"></i></div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Rank</p>
+                        <p class="stat-number">#24</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center"><i class="fas fa-trophy text-blue-600 dark:text-blue-400"></i></div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Study Time</p>
+                        <p class="stat-number">48h</p>
+                    </div>
+                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center"><i class="fas fa-clock text-purple-600 dark:text-purple-400"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div class="dashboard-card lg:col-span-2">
+                <h3 class="font-display font-bold text-lg mb-4 dark:text-white">Quick Actions</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <button onclick="navigateTo('tests')" class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-play-circle text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">Attempt Test</span>
+                    </button>
+                    <button onclick="navigateTo('reports')" class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-file-alt text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">View Reports</span>
+                    </button>
+                    <button onclick="navigateTo('materials')" class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-download text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">Download Materials</span>
+                    </button>
+                    <button onclick="navigateTo('topics')" class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-layer-group text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">Topic Analysis</span>
+                    </button>
+                    <button onclick="navigateTo('schedule')" class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-calendar-alt text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">Schedule</span>
+                    </button>
+                    <button class="p-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-center hover:bg-accent-gold/10 transition border border-transparent hover:border-accent-gold">
+                        <i class="fas fa-users text-2xl text-accent-gold mb-2 block"></i>
+                        <span class="text-sm font-medium dark:text-white">Discuss</span>
+                    </button>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <h3 class="font-display font-bold text-lg mb-3 dark:text-white">Upcoming</h3>
+                <div class="space-y-3">
+                    <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
+                        <p class="font-medium text-sm dark:text-white">Live Class: Polity</p>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Today, 6:00 PM</p>
+                        <span class="badge-status badge-upcoming text-xs mt-1">Upcoming</span>
+                    </div>
+                    <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
+                        <p class="font-medium text-sm dark:text-white">Full Mock Test</p>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Tomorrow, 10:00 AM</p>
+                        <span class="badge-status badge-pending text-xs mt-1">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Tests -->
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-lg mb-4 dark:text-white">Recent Tests</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-neutral-light dark:border-gray-700">
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Test Name</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Subject</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Score</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Status</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">UPSC Prelims Mock #12</td>
+                            <td class="p-2">GS</td>
+                            <td class="p-2 text-accent-gold font-bold">78%</td>
+                            <td class="p-2"><span class="badge-status badge-completed">Completed</span></td>
+                            <td class="p-2"><button class="text-accent-gold hover:underline text-sm">View Report</button></td>
+                        </tr>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Banking Quant #5</td>
+                            <td class="p-2">Quant</td>
+                            <td class="p-2 text-accent-gold font-bold">65%</td>
+                            <td class="p-2"><span class="badge-status badge-completed">Completed</span></td>
+                            <td class="p-2"><button class="text-accent-gold hover:underline text-sm">View Report</button></td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-medium dark:text-white">GATE CS Full Mock</td>
+                            <td class="p-2">CS</td>
+                            <td class="p-2 text-accent-gold font-bold">--</td>
+                            <td class="p-2"><span class="badge-status badge-pending">Pending</span></td>
+                            <td class="p-2"><button class="btn-gold text-xs px-3 py-1 rounded-full">Start</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MOCK TESTS SECTION ===== -->
+    <div id="section-tests" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Test Library</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Attempt subject-wise or full-length mock tests.</p>
+            
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button class="px-4 py-2 bg-accent-gold text-primary-navy rounded-full text-sm font-semibold">All</button>
+                <button class="px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-full text-sm font-medium dark:text-white hover:bg-accent-gold/10 transition">UPSC</button>
+                <button class="px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-full text-sm font-medium dark:text-white hover:bg-accent-gold/10 transition">Banking</button>
+                <button class="px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-full text-sm font-medium dark:text-white hover:bg-accent-gold/10 transition">SSC</button>
+                <button class="px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-full text-sm font-medium dark:text-white hover:bg-accent-gold/10 transition">GATE</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">UPSC Prelims Mock #13</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">GS Paper I · 100 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 2 hours</p>
+                        </div>
+                        <span class="badge-status badge-upcoming">Available</span>
+                    </div>
+                    <button class="btn-gold w-full mt-3 py-2 rounded-full text-sm font-semibold">Start Test</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">Banking Quant #6</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quantitative Aptitude · 50 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 45 min</p>
+                        </div>
+                        <span class="badge-status badge-upcoming">Available</span>
+                    </div>
+                    <button class="btn-gold w-full mt-3 py-2 rounded-full text-sm font-semibold">Start Test</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">SSC CGL Reasoning</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Reasoning · 50 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 60 min</p>
+                        </div>
+                        <span class="badge-status badge-pending">Locked</span>
+                    </div>
+                    <button class="btn-outline-gold w-full mt-3 py-2 rounded-full text-sm font-semibold" disabled>Unlock (7 days)</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">GATE CS Full Mock</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Computer Science · 65 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 3 hours</p>
+                        </div>
+                        <span class="badge-status badge-upcoming">Available</span>
+                    </div>
+                    <button class="btn-gold w-full mt-3 py-2 rounded-full text-sm font-semibold">Start Test</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCORE REPORTS SECTION ===== -->
+    <div id="section-reports" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Score Reports</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Detailed breakdown of correct/incorrect answers and time analysis.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <h4 class="font-bold dark:text-white">UPSC Prelims Mock #12</h4>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">GS Paper I</p>
+                    <div class="flex items-center gap-6 mt-3">
+                        <div class="text-center">
+                            <div class="score-ring ring-good">78%</div>
+                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Score</p>
+                        </div>
+                        <div>
+                            <p class="text-sm"><span class="text-green-600 dark:text-green-400">✔ Correct:</span> 78</p>
+                            <p class="text-sm"><span class="text-red-500">✘ Incorrect:</span> 12</p>
+                            <p class="text-sm"><span class="text-gray-500">⏱ Time:</span> 1h 48m</p>
+                            <p class="text-sm"><span class="text-blue-500">⏱ Avg:</span> 1.2 min/q</p>
+                        </div>
+                    </div>
+                    <button class="btn-outline-gold w-full mt-4 py-2 rounded-full text-sm font-semibold">View Full Report</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <h4 class="font-bold dark:text-white">Banking Quant #5</h4>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quantitative Aptitude</p>
+                    <div class="flex items-center gap-6 mt-3">
+                        <div class="text-center">
+                            <div class="score-ring ring-medium">65%</div>
+                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Score</p>
+                        </div>
+                        <div>
+                            <p class="text-sm"><span class="text-green-600 dark:text-green-400">✔ Correct:</span> 33</p>
+                            <p class="text-sm"><span class="text-red-500">✘ Incorrect:</span> 17</p>
+                            <p class="text-sm"><span class="text-gray-500">⏱ Time:</span> 38 min</p>
+                            <p class="text-sm"><span class="text-blue-500">⏱ Avg:</span> 0.8 min/q</p>
+                        </div>
+                    </div>
+                    <button class="btn-outline-gold w-full mt-4 py-2 rounded-full text-sm font-semibold">View Full Report</button>
+                </div>
+            </div>
+
+            <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl bg-neutral-light/50 dark:bg-gray-800/50">
+                <h4 class="font-bold dark:text-white mb-3">Subject-wise Performance</h4>
+                <div class="space-y-3">
+                    <div><span class="text-sm dark:text-white">Polity</span><div class="progress-bar mt-1"><div class="progress-fill" style="width:85%"></div></div></div>
+                    <div><span class="text-sm dark:text-white">History</span><div class="progress-bar mt-1"><div class="progress-fill" style="width:72%"></div></div></div>
+                    <div><span class="text-sm dark:text-white">Geography</span><div class="progress-bar mt-1"><div class="progress-fill" style="width:68%"></div></div></div>
+                    <div><span class="text-sm dark:text-white">Quant</span><div class="progress-bar mt-1"><div class="progress-fill" style="width:60%"></div></div></div>
+                    <div><span class="text-sm dark:text-white">Reasoning</span><div class="progress-bar mt-1"><div class="progress-fill" style="width:75%"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOPIC-WISE PROGRESS SECTION ===== -->
+    <div id="section-topics" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Topic-wise Progress</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Track your performance across topics to identify weak areas.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-bold dark:text-white">UPSC GS Topics</h4>
+                        <span class="topic-tag">10 tests</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div><span class="text-sm">Polity</span><div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div><span class="text-xs text-green-600">85%</span></div>
+                        <div><span class="text-sm">History</span><div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div><span class="text-xs text-yellow-600">70%</span></div>
+                        <div><span class="text-sm">Geography</span><div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div><span class="text-xs text-yellow-600">62%</span></div>
+                        <div><span class="text-sm">Economy</span><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div><span class="text-xs text-red-500">45%</span></div>
+                    </div>
+                    <p class="text-xs text-neutral-dark/40 dark:text-gray-500 mt-2">⚠️ Weak: Economy (45%) — Suggested: Review NCERT chapters 8-12</p>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-bold dark:text-white">Quant Topics</h4>
+                        <span class="topic-tag">8 tests</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div><span class="text-sm">Arithmetic</span><div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div><span class="text-xs text-green-600">78%</span></div>
+                        <div><span class="text-sm">Algebra</span><div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div><span class="text-xs text-red-500">55%</span></div>
+                        <div><span class="text-sm">Geometry</span><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div><span class="text-xs text-yellow-600">60%</span></div>
+                        <div><span class="text-sm">Data Interpretation</span><div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div><span class="text-xs text-green-600">82%</span></div>
+                    </div>
+                    <p class="text-xs text-neutral-dark/40 dark:text-gray-500 mt-2">⚠️ Weak: Algebra (55%) — Suggested: Practice linear equations &amp; quadratic</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== STUDY MATERIALS SECTION ===== -->
+    <div id="section-materials" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Study Materials</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Download study materials and previous year question papers.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 border border-neutral-light dark:border-gray-700 rounded-2xl text-center hover:border-accent-gold transition flex flex-col justify-between h-full bg-white dark:bg-dark-card shadow-sm">
+                    <div>
+                        <i class="fas fa-file-pdf text-3xl text-red-500 mb-2 block"></i>
+                        <h4 class="font-bold dark:text-white">UPSC Prelims 2024</h4>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Question Paper + Answer Key</p>
+                    </div>
+                    <button class="btn-gold w-full mt-4 py-2.5 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"><i class="fas fa-download"></i> Download</button>
+                </div>
+                <div class="p-6 border border-neutral-light dark:border-gray-700 rounded-2xl text-center hover:border-accent-gold transition flex flex-col justify-between h-full bg-white dark:bg-dark-card shadow-sm">
+                    <div>
+                        <i class="fas fa-file-pdf text-3xl text-blue-500 mb-2 block"></i>
+                        <h4 class="font-bold dark:text-white">Banking Quant Notes</h4>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Complete formula &amp; shortcut guide</p>
+                    </div>
+                    <button class="btn-gold w-full mt-4 py-2.5 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"><i class="fas fa-download"></i> Download</button>
+                </div>
+                <div class="p-6 border border-neutral-light dark:border-gray-700 rounded-2xl text-center hover:border-accent-gold transition flex flex-col justify-between h-full bg-white dark:bg-dark-card shadow-sm sm:col-span-2 lg:col-span-1">
+                    <div>
+                        <i class="fas fa-file-pdf text-3xl text-green-500 mb-2 block"></i>
+                        <h4 class="font-bold dark:text-white">GATE CS PYQs</h4>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Previous 5 years papers</p>
+                    </div>
+                    <button class="btn-gold w-full mt-4 py-2.5 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"><i class="fas fa-download"></i> Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCHEDULE SECTION ===== -->
+    <div id="section-schedule" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Schedule</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Upcoming live classes and exam notifications.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-bold dark:text-white mb-3">📚 Live Classes</h4>
+                    <div class="space-y-3">
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
+                            <p class="font-medium dark:text-white">Polity: Fundamental Rights</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Today, 6:00 PM - 7:30 PM</p>
+                            <span class="badge-status badge-upcoming text-xs">Upcoming</span>
+                        </div>
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
+                            <p class="font-medium dark:text-white">Quant: Algebra Session</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Tomorrow, 4:00 PM - 5:30 PM</p>
+                            <span class="badge-status badge-upcoming text-xs">Upcoming</span>
+                        </div>
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
+                            <p class="font-medium dark:text-white">GATE CS: DBMS Revision</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Aug 31, 10:00 AM - 12:00 PM</p>
+                            <span class="badge-status badge-upcoming text-xs">Upcoming</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold dark:text-white mb-3">📢 Exam Notifications</h4>
+                    <div class="space-y-3">
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl bg-neutral-light/50 dark:bg-gray-800/50">
+                            <p class="font-medium dark:text-white">UPSC Prelims 2026</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Application deadline: Sep 15, 2026</p>
+                            <span class="badge-status badge-pending text-xs">Pending</span>
+                        </div>
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl bg-neutral-light/50 dark:bg-gray-800/50">
+                            <p class="font-medium dark:text-white">SBI PO 2026</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Notification expected: Oct 1, 2026</p>
+                            <span class="badge-status badge-upcoming text-xs">Upcoming</span>
+                        </div>
+                        <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl bg-neutral-light/50 dark:bg-gray-800/50">
+                            <p class="font-medium dark:text-white">GATE 2027</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Registration: Nov 2026</p>
+                            <span class="badge-status badge-upcoming text-xs">Upcoming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            [themeToggle, mobileThemeToggle].forEach(btn => {
+                if(btn) {
+                    const moon = btn.querySelector('.fa-moon');
+                    const sun = btn.querySelector('.fa-sun');
+                    if(isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); btn.classList.add('active'); }
+                    else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); btn.classList.remove('active'); }
+                }
+            });
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            [themeToggle, mobileThemeToggle].forEach(btn => {
+                if(btn) {
+                    const moon = btn.querySelector('.fa-moon');
+                    const sun = btn.querySelector('.fa-sun');
+                    moon?.classList.add('hidden'); sun?.classList.remove('hidden'); btn.classList.add('active');
+                }
+            });
+        }
+
+        // RTL Toggle
+        const rtlToggle = document.getElementById('rtl-toggle');
+        const mobileRtlToggle = document.getElementById('rtl-toggle-mobile');
+        function toggleRTL() {
+            document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+            localStorage.setItem('dir', document.documentElement.dir);
+        }
+        if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+        if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+        if (localStorage.getItem('dir') === 'rtl') document.documentElement.dir = 'rtl';
+
+        // Mobile Sidebar
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+        function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+        if (menuToggle) menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+        window.addEventListener('resize', () => { if (window.innerWidth > 1024 && sidebar.classList.contains('open')) closeSidebar(); });
+
+        // Navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const sections = document.querySelectorAll('.page-section');
+        const pageTitle = document.getElementById('page-title');
+        const pageSubtitle = document.getElementById('page-subtitle');
+        const titles = {
+            overview: { title: 'Dashboard', subtitle: 'Welcome back, Rahul' },
+            tests: { title: 'Mock Tests', subtitle: 'Attempt subject-wise and full-length tests' },
+            reports: { title: 'Score Reports', subtitle: 'Detailed analysis of your performance' },
+            topics: { title: 'Topic-wise Progress', subtitle: 'Track your strengths and weaknesses' },
+            materials: { title: 'Study Materials', subtitle: 'Download resources and PYQs' },
+            schedule: { title: 'Schedule', subtitle: 'Upcoming classes and exam notifications' }
+        };
+
+        window.navigateTo = function(section) {
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            document.querySelector(`.sidebar-item[data-section="${section}"]`)?.classList.add('active');
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(`section-${section}`)?.classList.add('active');
+            if (titles[section]) {
+                pageTitle.textContent = titles[section].title;
+                pageSubtitle.textContent = titles[section].subtitle;
+            }
+            closeSidebar();
+        };
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navigateTo(item.getAttribute('data-section'));
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In · PrepElite</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A1928'/%3E%3Cpath fill='%23D4AF37' d='M25 50 L32 68 L50 48 L68 68 L75 50 L70 78 L30 78 Z'/%3E%3Ccircle cx='25' cy='48' r='3' fill='%23FFD700'/%3E%3Ccircle cx='50' cy='46' r='4' fill='%23FFD700'/%3E%3Ccircle cx='75' cy='48' r='3' fill='%23FFD700'/%3E%3Cpath fill='%23FFD700' d='M50 18 L82 32 L50 44 L18 32 Z'/%3E%3Cpath fill='%23B4942C' d='M34 38 L34 52 C34 52 42 58 50 58 C58 58 66 52 66 52 L66 38'/%3E%3Cpath stroke='%23FFD700' stroke-width='3' fill='none' stroke-linecap='round' d='M78 33 L78 52'/%3E%3Ccircle cx='78' cy='54' r='3' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+    <!-- Tailwind CSS -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-navy': '#0A1928',
+                        'secondary-charcoal': '#1E2A36',
+                        'accent-gold': '#D4AF37',
+                        'accent-gold-dark': '#B4942C',
+                        'neutral-dark': '#0F1A24',
+                        'neutral-light': '#F5F7FA',
+                        'dark-bg': '#000000',
+                        'dark-card': '#1A1A1A'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Lexend', 'Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ----- BASE STYLES ----- */
+        body {
+            min-height: 100vh;
+            background: #F5F7FA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #1E2A36;
+            overflow-y: auto;
+        }
+        .dark body {
+            background: #000000;
+            color: #E5E7EB;
+        }
+
+        /* Toggle Buttons - Top Right */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+        }
+        [dir="rtl"] .theme-toggle-wrapper {
+            right: auto;
+            left: 16px;
+        }
+
+        @media (max-width: 640px) and (min-height: 681px) {
+            body {
+                justify-content: flex-start !important;
+                padding-top: 4.5rem !important;
+                padding-bottom: 2rem !important;
+            }
+            .theme-toggle-wrapper {
+                top: 12px;
+                right: 12px;
+            }
+            .login-card {
+                padding: 1.5rem 1.25rem 1.25rem !important;
+                margin-top: 0.25rem !important;
+            }
+        }
+
+        /* Nest Hub & Short Viewport Height (<= 680px) */
+        @media (max-height: 680px) {
+            body {
+                padding: 0.5rem !important;
+                justify-content: center !important;
+            }
+            .login-card {
+                padding: 1.25rem 2rem 1.1rem !important;
+                max-width: 440px !important;
+                border-radius: 20px !important;
+            }
+            .logo-center {
+                margin-bottom: 0.4rem !important;
+            }
+            .welcome-title {
+                font-size: 1.3rem !important;
+                margin-top: 0.2rem !important;
+                margin-bottom: 0.1rem !important;
+            }
+            .welcome-subtitle {
+                font-size: 0.8rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            .gold-line {
+                margin: 0.3rem auto 0.4rem !important;
+            }
+            .login-input {
+                padding: 0.65rem 1rem 0.65rem 3.1rem !important;
+                font-size: 0.88rem !important;
+                border-radius: 10px !important;
+            }
+            .input-icon {
+                left: 0 !important;
+                width: 3.1rem !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .password-wrapper .login-input {
+                padding-right: 3.1rem !important;
+            }
+            .toggle-password {
+                right: 0.85rem !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+            }
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 0.45rem !important;
+            }
+            .btn-gold {
+                padding: 0.65rem 1rem !important;
+                font-size: 0.88rem !important;
+                border-radius: 10px !important;
+            }
+            .social-btn {
+                padding: 0.55rem 0.85rem !important;
+                font-size: 0.85rem !important;
+                border-radius: 10px !important;
+            }
+            .divider {
+                margin: 0.5rem 0 !important;
+            }
+            .theme-toggle-wrapper {
+                top: 10px !important;
+                right: 10px !important;
+                transform: scale(0.9);
+            }
+        }
+
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #FFFFFF;
+            border: 1.5px solid #E5E7EB;
+            color: #1E2A36;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .dark .toggle-btn {
+            background: #1A1A1A;
+            border-color: #2D3A46;
+            color: #E5E7EB;
+        }
+        .toggle-btn:hover {
+            background: #D4AF37;
+            color: #0A1928;
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+        }
+        .dark .toggle-btn:hover {
+            background: #D4AF37;
+            color: #0A1928;
+            border-color: #D4AF37;
+        }
+        .toggle-btn.active {
+            background: #D4AF37;
+            color: #0A1928;
+            border-color: #D4AF37;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 2.5rem 2.5rem 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            animation: slideUp 0.5s ease-out;
+        }
+        .dark .login-card {
+            background: #1A1A1A;
+            border-color: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0 1rem;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .dark .divider::before,
+        .dark .divider::after {
+            border-bottom-color: #2D3A46;
+        }
+        .divider span {
+            font-size: 0.75rem;
+            padding: 0 1rem;
+            color: #6B7280;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .dark .divider span {
+            color: #9CA3AF;
+        }
+
+        /* Inputs */
+        .login-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem 0.85rem 3rem;
+            border-radius: 12px;
+            border: 1.5px solid #E5E7EB;
+            background: #FAFBFC;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #1E2A36;
+            font-family: 'Inter', sans-serif;
+        }
+        .dark .login-input {
+            background: #0D0D0D;
+            border-color: #2D3A46;
+            color: #E5E7EB;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+        .dark .login-input:focus {
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+        .login-input::placeholder {
+            color: #9CA3AF;
+        }
+        .dark .login-input::placeholder {
+            color: #6B7280;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .dark .input-icon {
+            color: #6B7280;
+        }
+        [dir="rtl"] .input-icon {
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .login-input {
+            padding: 0.85rem 3rem 0.85rem 1.2rem;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        /* Password Toggle */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .password-wrapper .login-input {
+            padding-right: 3rem;
+        }
+        [dir="rtl"] .password-wrapper .login-input {
+            padding-right: 1.2rem;
+            padding-left: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9CA3AF;
+            font-size: 1rem;
+            background: transparent;
+            border: none;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+        .dark .toggle-password {
+            color: #6B7280;
+        }
+        .toggle-password:hover {
+            color: #D4AF37;
+        }
+        [dir="rtl"] .toggle-password {
+            right: auto;
+            left: 1rem;
+        }
+        [dir="rtl"] .password-wrapper .login-input {
+            padding-right: 1.2rem;
+            padding-left: 3rem;
+        }
+
+        /* Gold Button */
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #B4942C 100%);
+            color: #0A1928;
+            font-weight: 600;
+            padding: 0.85rem 1.8rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+        }
+
+        /* Social Buttons */
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem 0.5rem;
+            border-radius: 12px;
+            border: 1.5px solid #E5E7EB;
+            background: #FFFFFF;
+            color: #1E2A36;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .dark .social-btn {
+            background: #0D0D0D;
+            border-color: #2D3A46;
+            color: #E5E7EB;
+        }
+        .social-btn:hover {
+            background: #F5F7FA;
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+        }
+        .dark .social-btn:hover {
+            background: #1A1A1A;
+            border-color: #D4AF37;
+        }
+        .social-btn i {
+            font-size: 1.1rem;
+            color: #6B7280;
+        }
+        .dark .social-btn i {
+            color: #9CA3AF;
+        }
+        .social-btn:hover i {
+            color: #D4AF37;
+        }
+
+        /* Links */
+        .link-gold {
+            color: #D4AF37;
+            transition: color 0.2s;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .link-gold:hover {
+            color: #B4942C;
+            text-decoration: underline;
+        }
+        .dark .link-gold {
+            color: #D4AF37;
+        }
+        .dark .link-gold:hover {
+            color: #B4942C;
+        }
+
+        .text-muted {
+            color: #6B7280;
+        }
+        .dark .text-muted {
+            color: #9CA3AF;
+        }
+
+        /* Checkbox */
+        .gold-checkbox {
+            accent-color: #D4AF37;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 1.8rem 1.5rem;
+            }
+            .theme-toggle-wrapper {
+                top: 12px;
+                right: 12px;
+            }
+            [dir="rtl"] .theme-toggle-wrapper {
+                left: 12px;
+            }
+        }
+
+        @media (max-height: 680px) {
+            body {
+                padding: 0.75rem 0.5rem;
+            }
+            .login-card {
+                padding: 1.2rem 1.4rem;
+                border-radius: 20px;
+            }
+            .login-card .welcome-title {
+                font-size: 1.3rem;
+            }
+            .login-card .welcome-subtitle {
+                font-size: 0.8rem;
+            }
+            .login-input {
+                padding-top: 0.6rem;
+                padding-bottom: 0.6rem;
+                font-size: 0.85rem;
+            }
+            .btn-gold {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Logo */
+        .logo-icon {
+            transition: transform 0.3s ease;
+        }
+        a:hover .logo-icon {
+            transform: rotate(12deg) scale(1.05);
+        }
+
+        .welcome-title {
+            font-family: 'Lexend', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0A1928;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .dark .welcome-title {
+            color: #E5E7EB;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.9rem;
+            color: #6B7280;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .dark .welcome-subtitle {
+            color: #9CA3AF;
+        }
+
+        .gold-line {
+            width: 50px;
+            height: 3px;
+            background: #D4AF37;
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .logo-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== THEME TOGGLES - TOP-RIGHT ===== -->
+    <div class="theme-toggle-wrapper">
+        <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
+            ⇄
+        </button>
+    </div>
+
+    <!-- ===== LOGIN CARD ===== -->
+    <div class="login-card">
+
+        <!-- ===== LOGO - CENTERED ===== -->
+        <div class="logo-center">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 bg-[#D4AF37] rounded-xl flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-[#0A1928] text-xl logo-icon"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-display font-bold tracking-tight text-[#0A1928] dark:text-white">PREPELITE</span>
+                </div>
+            </a>
+            <h1 class="welcome-title">Welcome Back</h1>
+            <p class="welcome-subtitle">Sign in to continue your preparation</p>
+            <div class="gold-line"></div>
+        </div>
+
+        <!-- ===== LOGIN FORM ===== -->
+        <form class="space-y-5" action="index.html" method="GET">
+
+            <!-- Email field -->
+            <div class="relative">
+                <span class="input-icon">
+                    <i class="fas fa-envelope w-5 text-sm"></i>
+                </span>
+                <input type="email" name="email" placeholder="Email address" required
+                    class="login-input text-sm md:text-base">
+            </div>
+
+            <!-- Password field with eye toggle -->
+            <div class="password-wrapper">
+                <span class="input-icon">
+                    <i class="fas fa-lock w-5 text-sm"></i>
+                </span>
+                <input type="password" id="login-password" name="password" placeholder="Password" required
+                    class="login-input text-sm md:text-base">
+                <button type="button" class="toggle-password" data-target="login-password"
+                    aria-label="Show password">
+                    <i class="far fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <!-- Remember me + Forgot password -->
+            <div class="flex items-center justify-between text-sm">
+                <label class="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer">
+                    <input type="checkbox" checked class="gold-checkbox rounded">
+                    <span class="text-muted">Remember me</span>
+                </label>
+                <a href="#" class="link-gold font-medium transition">
+                    Forgot password?
+                </a>
+            </div>
+
+            <!-- LOGIN BUTTON -->
+            <button type="submit" class="btn-gold mt-2">
+                Sign In
+                <i class="fas fa-sign-in-alt ml-2 rtl:mr-2 rtl:ml-0"></i>
+            </button>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+        </form>
+
+        <!-- ===== SOCIAL LOGIN BUTTONS ===== -->
+        <div class="mt-4">
+            <div class="grid grid-cols-2 gap-3">
+                <button class="social-btn" onclick="window.location.href='index.html';">
+                    <i class="fab fa-google text-base"></i>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn" onclick="window.location.href='index.html';">
+                    <i class="fab fa-apple text-base"></i>
+                    <span>Apple</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== "NOT A MEMBER? SIGN UP" ===== -->
+        <div class="mt-6 text-center pt-5 border-t border-[#E5E7EB] dark:border-[#2D3A46]">
+            <span class="text-sm text-muted">Not a member yet?</span>
+            <a href="signup.html" class="text-sm font-semibold link-gold transition ml-1 rtl:mr-1">
+                Create Account
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            // ---------- THEME ----------
+            const themeToggle = document.getElementById('theme-toggle');
+
+            function setTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+                const icon = themeToggle?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-sun', 'fa-moon');
+                    icon.classList.add(isDark ? 'fa-moon' : 'fa-sun');
+                }
+                themeToggle?.classList.toggle('active', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                setTheme(true);
+            } else if (savedTheme === 'light') {
+                setTheme(false);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme(true);
+            } else {
+                setTheme(false);
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setTheme(!document.documentElement.classList.contains('dark'));
+                });
+            }
+
+            // ---------- RTL ----------
+            const rtlBtn = document.getElementById('rtl-toggle');
+
+            function setRTL(isRTL) {
+                if (isRTL) {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    rtlBtn?.classList.add('active');
+                    localStorage.setItem('dir', 'rtl');
+                } else {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    rtlBtn?.classList.remove('active');
+                    localStorage.setItem('dir', 'ltr');
+                }
+            }
+            const savedDir = localStorage.getItem('dir');
+            savedDir === 'rtl' ? setRTL(true) : setRTL(false);
+
+            if (rtlBtn) {
+                rtlBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setRTL(document.documentElement.dir !== 'rtl');
+                });
+            }
+
+            // ---------- EYE ICON TOGGLE PASSWORD ----------
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    if (passwordInput) {
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+                        const icon = this.querySelector('i');
+                        if (icon) {
+                            if (type === 'text') {
+                                icon.classList.remove('fa-eye-slash');
+                                icon.classList.add('fa-eye');
+                            } else {
+                                icon.classList.remove('fa-eye');
+                                icon.classList.add('fa-eye-slash');
+                            }
+                        }
+                    }
+                });
+            });
+
+            // ---------- FORGOT PASSWORD DEMO ----------
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                if (link.textContent.includes('Forgot') || link.innerHTML.includes('Forgot')) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        alert('🔐 A password reset link will be sent to your registered email address.');
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

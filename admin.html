@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | PrepElite</title>
+    <!-- Custom Favicon - Golden Crown & Graduation Cap -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A1928'/%3E%3Cpath fill='%23D4AF37' d='M25 50 L32 68 L50 48 L68 68 L75 50 L70 78 L30 78 Z'/%3E%3Ccircle cx='25' cy='48' r='3' fill='%23FFD700'/%3E%3Ccircle cx='50' cy='46' r='4' fill='%23FFD700'/%3E%3Ccircle cx='75' cy='48' r='3' fill='%23FFD700'/%3E%3Cpath fill='%23FFD700' d='M50 18 L82 32 L50 44 L18 32 Z'/%3E%3Cpath fill='%23B4942C' d='M34 38 L34 52 C34 52 42 58 50 58 C58 58 66 52 66 52 L66 38'/%3E%3Cpath stroke='%23FFD700' stroke-width='3' fill='none' stroke-linecap='round' d='M78 33 L78 52'/%3E%3Ccircle cx='78' cy='54' r='3' fill='%23D4AF37'/%3E%3C/svg%3E">
+    
+    <!-- Tailwind + Config -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-navy': '#0A1928',
+                        'secondary-charcoal': '#1E2A36',
+                        'accent-gold': '#D4AF37',
+                        'accent-gold-dark': '#B4942C',
+                        'neutral-dark': '#0F1A24',
+                        'neutral-light': '#F5F7FA',
+                        'dark-bg': '#000000',
+                        'dark-card': '#1A1A1A'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Lexend', 'Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } }
+                    },
+                    backgroundImage: {
+                        'exam-pattern': "radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 60%)",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === Base Styles (same as reference) === */
+        body {
+            background-color: #F5F7FA;
+            color: #1E2A36;
+            scroll-behavior: smooth;
+        }
+        .dark body {
+            background-color: #000000;
+            color: #E5E7EB;
+        }
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: #E5E7EB; }
+        body::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #B4942C 100%);
+            color: #0A1928;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+        }
+        .btn-outline-gold {
+            border: 1.5px solid #D4AF37;
+            color: #D4AF37;
+            background: transparent;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-outline-gold:hover {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        .nav-item:hover::after,
+        .nav-item.active::after { width: 100%; }
+        .nav-item.active {
+            color: #D4AF37 !important;
+            font-weight: 600;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #E5E7EB;
+        }
+        .dark .dropdown-menu {
+            background: #1A1A1A;
+            border-color: #2D3A46;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #1E2A36;
+            transition: all 0.2s;
+        }
+        .dark .dropdown-item { color: #E5E7EB; }
+        .dropdown-item:hover {
+            background: #F3F4F6;
+            color: #D4AF37;
+            padding-left: 1.75rem;
+        }
+        .dark .dropdown-item:hover { background: #2D3A46; }
+
+        .auth-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .auth-btn.login {
+            background: transparent;
+            border-color: #D1D5DB;
+            color: #1E2A36;
+        }
+        .dark .auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .auth-btn.login:hover { border-color: #D4AF37; color: #D4AF37; }
+        .auth-btn.signup {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+        .auth-btn.signup:hover { background: #B4942C; transform: translateY(-2px); }
+
+        .toggle-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .toggle-btn { background: #2D3A46; color: #9CA3AF; }
+        .toggle-btn:hover { background: #E5E7EB; color: #D4AF37; }
+        .dark .toggle-btn:hover { background: #3B4A58; color: #D4AF37; }
+        .toggle-btn.active { background: #D4AF37; color: white; }
+
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .dark .mobile-menu { background: #000000; border-color: #2D3A46; }
+        .mobile-menu.open {
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .mobile-menu.open::-webkit-scrollbar { display: none; }
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: #1E2A36;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.2s ease;
+        }
+        .dark .mobile-menu-item { color: #D1D5DB; border-bottom-color: #2D3A46; }
+        .mobile-menu-item:hover { background-color: #F9FAFB; color: #D4AF37; }
+        .dark .mobile-menu-item:hover { background-color: #1A1A1A; }
+
+        .mobile-auth-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0.25rem;
+            border: 1px solid transparent;
+        }
+        .mobile-auth-btn.login {
+            background: transparent;
+            border-color: #D1D5DB;
+            color: #1E2A36;
+        }
+        .dark .mobile-auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .mobile-auth-btn.login:hover { background-color: #D4AF37; color: white; border-color: #D4AF37; }
+        .mobile-auth-btn.signup { background: #D4AF37; color: #0A1928; }
+        .mobile-auth-btn.signup:hover { background: #B4942C; }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-dropdown-content.show { max-height: 300px; }
+        .mobile-dropdown-item {
+            display: block;
+            padding: 0.75rem 2.5rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #F9FAFB;
+        }
+        .dark .mobile-dropdown-item { color: #9CA3AF; border-bottom-color: #2D3A46; }
+        .mobile-dropdown-item:hover { color: #D4AF37; background-color: #F9FAFB; }
+        .dark .mobile-dropdown-item:hover { background-color: #1A1A1A; }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            color: #1E2A36;
+            transition: all 0.3s ease;
+        }
+        .dark .social-icon { background: #2D3A46; color: #E5E7EB; }
+        .social-icon:hover { background: #D4AF37; color: white; transform: translateY(-3px); }
+
+        .desktop-nav-container { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-spacing { display: flex; align-items: center; gap: 1.25rem; }
+
+        /* Dashboard specific styles */
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+        .dark .dashboard-card {
+            background: #1A1A1A;
+            border-color: rgba(212, 175, 55, 0.1);
+        }
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #D4AF37;
+            line-height: 1;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-active { background: #D1FAE5; color: #065F46; }
+        .badge-pending { background: #FEF3C7; color: #92400E; }
+        .badge-inactive { background: #FEE2E2; color: #991B1B; }
+        .badge-completed { background: #DBEAFE; color: #1E40AF; }
+        .dark .badge-active { background: #064E3B; color: #A7F3D0; }
+        .dark .badge-pending { background: #78350F; color: #FDE68A; }
+        .dark .badge-inactive { background: #7F1D1D; color: #FCA5A5; }
+        .dark .badge-completed { background: #1E3A5F; color: #93C5FD; }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 260px;
+            background: white;
+            border-right: 1px solid #E5E5E5;
+            transition: transform 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+        .dark .sidebar { background: #000000; border-right-color: #2D3A46; }
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            display: none;
+        }
+        .sidebar-overlay.open { display: block; }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1.5rem;
+            margin: 0.15rem 0.75rem;
+            border-radius: 12px;
+            color: #6B7280;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .dark .sidebar-item { color: #9CA3AF; }
+        .sidebar-item:hover { background: #F3F4F6; color: #1E2A36; }
+        .dark .sidebar-item:hover { background: #1A1A1A; color: #E5E7EB; }
+        .sidebar-item.active {
+            background: #D4AF37;
+            color: #0A1928;
+        }
+        .dark .sidebar-item.active { background: #D4AF37; color: #0A1928; }
+        .sidebar-item i { width: 22px; font-size: 1rem; }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+        @media (max-width: 1024px) {
+            .main-content { margin-left: 0; padding-top: 70px; padding-left: 1rem; padding-right: 1rem; }
+        }
+
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E5E5E5;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dark .mobile-header { background: #000000; border-bottom-color: #2D3A46; }
+        @media (max-width: 1024px) { .mobile-header { display: flex; } }
+
+        .top-header {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #E5E7EB;
+        }
+        .dark .top-header { background: #1A1A1A; border-color: #2D3A46; }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+
+        .progress-bar {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .dark .progress-bar { background: #2D3A46; }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #D4AF37, #B4942C);
+            transition: width 0.8s ease;
+        }
+    </style>
+</head>
+<body class="exam-pattern">
+
+<!-- ===== MOBILE HEADER ===== -->
+<div class="mobile-header">
+    <div class="flex items-center gap-3">
+        <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+        <a class="flex items-center space-x-2 group" href="index.html">
+            <div class="w-9 h-9 bg-accent-gold rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <i class="fas fa-graduation-cap text-primary-navy text-sm"></i>
+            </div>
+            <div>
+                <span class="text-xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">PREPELITE</span>
+            </div>
+        </a>
+    </div>
+    <div class="flex items-center gap-2">
+        <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+        <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+        <img src="assets/img_2.jpg" alt="Admin User" class="w-8 h-8 rounded-full object-cover object-[center_20%] border-2 border-accent-gold shadow-sm ml-1">
+    </div>
+</div>
+
+<!-- ===== SIDEBAR OVERLAY ===== -->
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+    <div class="p-5 border-b border-neutral-light dark:border-gray-800">
+        <a class="flex items-center space-x-3 group" href="index.html">
+            <div class="w-10 h-10 bg-accent-gold rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <i class="fas fa-graduation-cap text-primary-navy text-lg"></i>
+            </div>
+            <div>
+                <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">PREPELITE</span>
+            </div>
+        </a>
+        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Admin Panel</p>
+    </div>
+    <nav class="py-3">
+        <div class="sidebar-item active" data-section="overview"><i class="fas fa-tachometer-alt"></i><span>Overview</span></div>
+        <div class="sidebar-item" data-section="students"><i class="fas fa-user-graduate"></i><span>Students</span></div>
+        <div class="sidebar-item" data-section="instructors"><i class="fas fa-chalkboard-teacher"></i><span>Instructors</span></div>
+        <div class="sidebar-item" data-section="courses"><i class="fas fa-book"></i><span>Courses</span></div>
+        <div class="sidebar-item" data-section="tests"><i class="fas fa-pencil-alt"></i><span>Mock Tests</span></div>
+        <div class="sidebar-item" data-section="payments"><i class="fas fa-credit-card"></i><span>Payments</span></div>
+        <div class="sidebar-item" data-section="inquiries"><i class="fas fa-envelope"></i><span>Inquiries</span></div>
+    </nav>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-neutral-light dark:border-gray-800">
+        <a href="login.html" class="flex items-center justify-center gap-2 w-full p-2.5 rounded-xl bg-neutral-light dark:bg-gray-800 hover:bg-accent-gold dark:hover:bg-accent-gold transition font-semibold text-sm text-neutral-dark dark:text-gray-200 hover:text-white dark:hover:text-white border border-neutral-light dark:border-gray-700">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+    <!-- Top Header -->
+    <div class="top-header flex justify-between items-center flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-display font-bold" id="page-title">Overview</h1>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400" id="page-subtitle">Welcome back, Admin</p>
+        </div>
+        <div class="hidden lg:flex items-center gap-4">
+            <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+            <div class="flex items-center gap-3 border-l border-neutral-light dark:border-gray-800 pl-4">
+                <img src="assets/img_2.jpg" alt="Admin User" class="w-10 h-10 rounded-full object-cover object-[center_20%] border-2 border-accent-gold shadow-sm">
+                <div class="text-left hidden lg:block">
+                    <p class="text-sm font-bold text-neutral-dark dark:text-white leading-tight">Admin User</p>
+                    <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">Super Admin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== OVERVIEW SECTION ===== -->
+    <div id="section-overview" class="page-section active">
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Total Students</p>
+                        <p class="stat-number">1,847</p>
+                    </div>
+                    <div class="w-10 h-10 bg-accent-gold/10 rounded-full flex items-center justify-center"><i class="fas fa-user-graduate text-accent-gold"></i></div>
+                </div>
+                <p class="text-xs text-green-600 dark:text-green-400 mt-2">↑ 12% this month</p>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Instructors</p>
+                        <p class="stat-number">42</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center"><i class="fas fa-chalkboard-teacher text-blue-600 dark:text-blue-400"></i></div>
+                </div>
+                <p class="text-xs text-green-600 dark:text-green-400 mt-2">↑ 3 new this month</p>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Active Courses</p>
+                        <p class="stat-number">28</p>
+                    </div>
+                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center"><i class="fas fa-book text-purple-600 dark:text-purple-400"></i></div>
+                </div>
+                <p class="text-xs text-green-600 dark:text-green-400 mt-2">↑ 4 new this month</p>
+            </div>
+            <div class="dashboard-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Revenue (MTD)</p>
+                        <p class="stat-number">₹8.4L</p>
+                    </div>
+                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center"><i class="fas fa-rupee-sign text-green-600 dark:text-green-400"></i></div>
+                </div>
+                <p class="text-xs text-green-600 dark:text-green-400 mt-2">↑ 18% from last month</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions & Recent -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="dashboard-card lg:col-span-2">
+                <h3 class="font-display font-bold text-lg mb-4 dark:text-white">Recent Activity</h3>
+                <div class="space-y-3">
+                    <div class="flex gap-3 pb-2 border-b border-neutral-light dark:border-gray-700">
+                        <i class="fas fa-user-plus text-accent-gold mt-1"></i>
+                        <div><p class="text-sm font-medium dark:text-white">New student registered: Rahul Kumar</p><p class="text-xs text-neutral-dark/60 dark:text-gray-400">UPSC Prelims Course</p></div>
+                    </div>
+                    <div class="flex gap-3 pb-2 border-b border-neutral-light dark:border-gray-700">
+                        <i class="fas fa-file-alt text-accent-gold mt-1"></i>
+                        <div><p class="text-sm font-medium dark:text-white">Mock test created: UPSC Prelims #13</p><p class="text-xs text-neutral-dark/60 dark:text-gray-400">By Dr. Anjali Kapoor</p></div>
+                    </div>
+                    <div class="flex gap-3 pb-2 border-b border-neutral-light dark:border-gray-700">
+                        <i class="fas fa-credit-card text-accent-gold mt-1"></i>
+                        <div><p class="text-sm font-medium dark:text-white">Payment received: ₹24,999</p><p class="text-xs text-neutral-dark/60 dark:text-gray-400">From Priya Patel - GATE CS Course</p></div>
+                    </div>
+                    <div class="flex gap-3">
+                        <i class="fas fa-envelope text-accent-gold mt-1"></i>
+                        <div><p class="text-sm font-medium dark:text-white">New inquiry from: Ananya Sharma</p><p class="text-xs text-neutral-dark/60 dark:text-gray-400">Regarding UPSC 2026 batch</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <h3 class="font-display font-bold text-lg mb-3 dark:text-white">Quick Actions</h3>
+                <div class="space-y-2">
+                    <button onclick="navigateTo('students')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">👥 View All Students</button>
+                    <button onclick="navigateTo('courses')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">📚 Manage Courses</button>
+                    <button onclick="navigateTo('tests')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">📝 Create Mock Test</button>
+                    <button onclick="navigateTo('inquiries')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">✉️ View Inquiries (3 unread)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== STUDENTS SECTION ===== -->
+    <div id="section-students" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Students</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Manage all registered students and their progress.</p>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-neutral-light dark:border-gray-700">
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Name</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Email</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Course</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Progress</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Rahul Kumar</td>
+                            <td class="p-2">rahul@email.com</td>
+                            <td class="p-2">UPSC 2026</td>
+                            <td class="p-2"><div class="w-24"><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div><span class="text-xs">65%</span></div></td>
+                            <td class="p-2"><span class="badge-status badge-active">Active</span></td>
+                        </tr>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Priya Patel</td>
+                            <td class="p-2">priya@email.com</td>
+                            <td class="p-2">GATE CS</td>
+                            <td class="p-2"><div class="w-24"><div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div><span class="text-xs">80%</span></div></td>
+                            <td class="p-2"><span class="badge-status badge-active">Active</span></td>
+                        </tr>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Ananya Sharma</td>
+                            <td class="p-2">ananya@email.com</td>
+                            <td class="p-2">UPSC 2026</td>
+                            <td class="p-2"><div class="w-24"><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div><span class="text-xs">45%</span></div></td>
+                            <td class="p-2"><span class="badge-status badge-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-medium dark:text-white">Vikram Singh</td>
+                            <td class="p-2">vikram@email.com</td>
+                            <td class="p-2">Banking Elite</td>
+                            <td class="p-2"><div class="w-24"><div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div><span class="text-xs">92%</span></div></td>
+                            <td class="p-2"><span class="badge-status badge-completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== INSTRUCTORS SECTION ===== -->
+    <div id="section-instructors" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Instructors</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Manage faculty members and their assigned courses.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl flex items-center gap-4 hover:border-accent-gold transition">
+                    <div class="w-12 h-12 rounded-full bg-accent-gold/20 flex items-center justify-center text-accent-gold font-bold text-lg">AK</div>
+                    <div>
+                        <p class="font-bold dark:text-white">Dr. Anjali Kapoor</p>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">UPSC · Polity</p>
+                        <span class="badge-status badge-active text-xs">Active</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl flex items-center gap-4 hover:border-accent-gold transition">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-lg">RM</div>
+                    <div>
+                        <p class="font-bold dark:text-white">Rahul Mehta</p>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quant · Reasoning</p>
+                        <span class="badge-status badge-active text-xs">Active</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl flex items-center gap-4 hover:border-accent-gold transition">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 font-bold text-lg">SR</div>
+                    <div>
+                        <p class="font-bold dark:text-white">Dr. Sunita Reddy</p>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">English · GK</p>
+                        <span class="badge-status badge-active text-xs">Active</span>
+                    </div>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl flex items-center gap-4 hover:border-accent-gold transition">
+                    <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-lg">VP</div>
+                    <div>
+                        <p class="font-bold dark:text-white">Vikram Patel</p>
+                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Banking · Quant</p>
+                        <span class="badge-status badge-pending text-xs">On Leave</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== COURSES SECTION ===== -->
+    <div id="section-courses" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Courses</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Manage all courses and their details.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <h4 class="font-bold dark:text-white">UPSC Civil Services</h4>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">200+ hrs · Live classes</p>
+                    <div class="flex justify-between mt-2 text-sm">
+                        <span>Students: 342</span>
+                        <span class="text-accent-gold">₹29,999</span>
+                    </div>
+                    <span class="badge-status badge-active text-xs mt-2">Active</span>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <h4 class="font-bold dark:text-white">Banking Elite</h4>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">5000+ Qs · Live sessions</p>
+                    <div class="flex justify-between mt-2 text-sm">
+                        <span>Students: 281</span>
+                        <span class="text-accent-gold">₹19,999</span>
+                    </div>
+                    <span class="badge-status badge-active text-xs mt-2">Active</span>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl hover:border-accent-gold transition">
+                    <h4 class="font-bold dark:text-white">GATE Engineering</h4>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Full syllabus · Mock tests</p>
+                    <div class="flex justify-between mt-2 text-sm">
+                        <span>Students: 156</span>
+                        <span class="text-accent-gold">₹24,999</span>
+                    </div>
+                    <span class="badge-status badge-active text-xs mt-2">Active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MOCK TESTS SECTION ===== -->
+    <div id="section-tests" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Mock Tests</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Create and manage mock tests for students.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">UPSC Prelims #12</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">GS Paper I · 100 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 2 hours</p>
+                        </div>
+                        <span class="badge-status badge-completed">Published</span>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="btn-gold text-xs px-3 py-1 rounded-full">Edit</button>
+                        <button class="btn-outline-gold text-xs px-3 py-1 rounded-full">Results</button>
+                    </div>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold dark:text-white">Banking Quant #6</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quantitative Aptitude · 50 questions</p>
+                            <p class="text-xs text-accent-gold mt-1">⏱ 45 min</p>
+                        </div>
+                        <span class="badge-status badge-pending">Draft</span>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        <button class="btn-gold text-xs px-3 py-1 rounded-full">Edit</button>
+                        <button class="btn-outline-gold text-xs px-3 py-1 rounded-full">Publish</button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-gold w-full mt-4 py-2 rounded-full text-sm font-semibold"><i class="fas fa-plus mr-2"></i>Create New Test</button>
+        </div>
+    </div>
+
+    <!-- ===== PAYMENTS SECTION ===== -->
+    <div id="section-payments" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Payments</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Track all transactions and revenue.</p>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-neutral-light dark:border-gray-700">
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Student</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Course</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Amount</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Date</th>
+                            <th class="text-left p-2 font-semibold text-neutral-dark/60 dark:text-gray-400">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Priya Patel</td>
+                            <td class="p-2">GATE CS</td>
+                            <td class="p-2 text-accent-gold font-bold">₹24,999</td>
+                            <td class="p-2">Aug 28, 2026</td>
+                            <td class="p-2"><span class="badge-status badge-completed">Completed</span></td>
+                        </tr>
+                        <tr class="border-b border-neutral-light/50 dark:border-gray-700/50">
+                            <td class="p-2 font-medium dark:text-white">Rahul Kumar</td>
+                            <td class="p-2">UPSC 2026</td>
+                            <td class="p-2 text-accent-gold font-bold">₹29,999</td>
+                            <td class="p-2">Aug 25, 2026</td>
+                            <td class="p-2"><span class="badge-status badge-completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-medium dark:text-white">Ananya Sharma</td>
+                            <td class="p-2">UPSC 2026</td>
+                            <td class="p-2 text-accent-gold font-bold">₹29,999</td>
+                            <td class="p-2">Aug 22, 2026</td>
+                            <td class="p-2"><span class="badge-status badge-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== INQUIRIES SECTION ===== -->
+    <div id="section-inquiries" class="page-section">
+        <div class="dashboard-card">
+            <h3 class="font-display font-bold text-2xl mb-2 dark:text-white">Inquiries</h3>
+            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Manage all inquiries from prospective students.</p>
+            
+            <div class="space-y-3">
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold dark:text-white">Ananya Sharma</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">ananya@email.com</p>
+                            <p class="text-sm mt-1 dark:text-gray-300">"I'm interested in the UPSC 2026 batch. When does the next batch start?"</p>
+                        </div>
+                        <span class="badge-status badge-pending text-xs">Unread</span>
+                    </div>
+                    <button class="btn-gold text-sm px-4 py-1.5 rounded-full mt-3">Reply</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold dark:text-white">Vikram Singh</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">vikram@email.com</p>
+                            <p class="text-sm mt-1 dark:text-gray-300">"Is there any scholarship available for the Banking Elite course?"</p>
+                        </div>
+                        <span class="badge-status badge-completed text-xs">Read</span>
+                    </div>
+                    <button class="btn-gold text-sm px-4 py-1.5 rounded-full mt-3">Reply</button>
+                </div>
+                <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold dark:text-white">Neha Kulkarni</p>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">neha@email.com</p>
+                            <p class="text-sm mt-1 dark:text-gray-300">"Can I get a demo class before enrolling in the GATE CS course?"</p>
+                        </div>
+                        <span class="badge-status badge-pending text-xs">Unread</span>
+                    </div>
+                    <button class="btn-gold text-sm px-4 py-1.5 rounded-full mt-3">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            [themeToggle, mobileThemeToggle].forEach(btn => {
+                if(btn) {
+                    const moon = btn.querySelector('.fa-moon');
+                    const sun = btn.querySelector('.fa-sun');
+                    if(isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); btn.classList.add('active'); }
+                    else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); btn.classList.remove('active'); }
+                }
+            });
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            [themeToggle, mobileThemeToggle].forEach(btn => {
+                if(btn) {
+                    const moon = btn.querySelector('.fa-moon');
+                    const sun = btn.querySelector('.fa-sun');
+                    moon?.classList.add('hidden'); sun?.classList.remove('hidden'); btn.classList.add('active');
+                }
+            });
+        }
+
+        // RTL Toggle
+        const rtlToggle = document.getElementById('rtl-toggle');
+        const mobileRtlToggle = document.getElementById('rtl-toggle-mobile');
+        function toggleRTL() {
+            document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+            localStorage.setItem('dir', document.documentElement.dir);
+        }
+        if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+        if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+        if (localStorage.getItem('dir') === 'rtl') document.documentElement.dir = 'rtl';
+
+        // Mobile Sidebar
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+        function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+        if (menuToggle) menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+        window.addEventListener('resize', () => { if (window.innerWidth > 1024 && sidebar.classList.contains('open')) closeSidebar(); });
+
+        // Navigation
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const sections = document.querySelectorAll('.page-section');
+        const pageTitle = document.getElementById('page-title');
+        const pageSubtitle = document.getElementById('page-subtitle');
+        const titles = {
+            overview: { title: 'Overview', subtitle: 'Welcome back, Admin' },
+            students: { title: 'Students', subtitle: 'Manage all registered students' },
+            instructors: { title: 'Instructors', subtitle: 'Manage faculty members' },
+            courses: { title: 'Courses', subtitle: 'Manage all courses' },
+            tests: { title: 'Mock Tests', subtitle: 'Create and manage mock tests' },
+            payments: { title: 'Payments', subtitle: 'Track all transactions' },
+            inquiries: { title: 'Inquiries', subtitle: 'Manage inquiries from students' }
+        };
+
+        window.navigateTo = function(section) {
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            document.querySelector(`.sidebar-item[data-section="${section}"]`)?.classList.add('active');
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(`section-${section}`)?.classList.add('active');
+            if (titles[section]) {
+                pageTitle.textContent = titles[section].title;
+                pageSubtitle.textContent = titles[section].subtitle;
+            }
+            closeSidebar();
+        };
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navigateTo(item.getAttribute('data-section'));
+            });
+        });
+    });
+</script>
+</body>
+</html>
