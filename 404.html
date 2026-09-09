@@ -62,6 +62,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+
+    /* Typography Hierarchy Enforcement: Heading font weight up to 600, Subheadings 400-550 */
+    h1, h2, h3, h4, h5, h6, .font-display {
+      font-weight: 600 !important;
+    }
+    .font-extrabold, .font-black, .font-bold {
+      font-weight: 600 !important;
+    }
+    .font-semibold {
+      font-weight: 600 !important;
+    }
+    p, .subheading, .section-subtitle, .welcome-subtitle, .lead-text {
+      font-weight: 400;
+    }
+    .font-medium {
+      font-weight: 500 !important;
+    }
+
         body {
             background: #F5F7FA;
             font-family: 'Inter', system-ui, sans-serif;
@@ -199,7 +217,7 @@
     <!-- ========== HEADER ========== -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-dark-bg/90 backdrop-blur-md border-b border-neutral-light dark:border-gray-800">
         <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-3 group">
                     <div class="w-10 h-10 bg-accent-gold rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
