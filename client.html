@@ -468,7 +468,7 @@
     </div>
     <div class="flex items-center gap-2">
         <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-        <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+        <button id="rtl-toggle-mobile" class="toggle-btn"><i class="fa-solid fa-right-left"></i></button>
         <img src="assets/s1.jpg" alt="Rahul Kumar" class="w-8 h-8 rounded-full object-cover border-2 border-accent-gold shadow-sm ml-1">
     </div>
 </div>
@@ -515,7 +515,7 @@
         </div>
         <div class="hidden lg:flex items-center gap-4">
             <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+            <button id="rtl-toggle" class="toggle-btn"><i class="fa-solid fa-right-left"></i></button>
             <div class="flex items-center gap-3 border-l border-neutral-light dark:border-gray-800 pl-4">
                 <img src="assets/s1.jpg" alt="Rahul Kumar" class="w-10 h-10 rounded-full object-cover border-2 border-accent-gold shadow-sm">
                 <div class="text-left hidden lg:block">
@@ -678,7 +678,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">UPSC Prelims Mock #13</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">GS Paper I · 100 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 2 hours</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 2 hours</p>
                         </div>
                         <span class="badge-status badge-upcoming">Available</span>
                     </div>
@@ -689,7 +689,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">Banking Quant #6</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quantitative Aptitude · 50 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 45 min</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 45 min</p>
                         </div>
                         <span class="badge-status badge-upcoming">Available</span>
                     </div>
@@ -700,7 +700,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">SSC CGL Reasoning</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Reasoning · 50 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 60 min</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 60 min</p>
                         </div>
                         <span class="badge-status badge-pending">Locked</span>
                     </div>
@@ -711,7 +711,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">GATE CS Full Mock</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Computer Science · 65 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 3 hours</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 3 hours</p>
                         </div>
                         <span class="badge-status badge-upcoming">Available</span>
                     </div>
@@ -736,11 +736,11 @@
                             <div class="score-ring ring-good">78%</div>
                             <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Score</p>
                         </div>
-                        <div>
-                            <p class="text-sm"><span class="text-green-600 dark:text-green-400">✔ Correct:</span> 78</p>
-                            <p class="text-sm"><span class="text-red-500">✘ Incorrect:</span> 12</p>
-                            <p class="text-sm"><span class="text-gray-500">⏱ Time:</span> 1h 48m</p>
-                            <p class="text-sm"><span class="text-blue-500">⏱ Avg:</span> 1.2 min/q</p>
+                        <div class="space-y-1">
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-emerald-500 dark:text-emerald-400 font-semibold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Correct:</span> 78</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-rose-500 font-semibold flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Incorrect:</span> 12</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-gray-500 dark:text-gray-400 font-semibold flex items-center gap-1"><i class="fa-regular fa-clock"></i> Time:</span> 1h 48m</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-blue-500 font-semibold flex items-center gap-1"><i class="fa-solid fa-stopwatch"></i> Avg:</span> 1.2 min/q</p>
                         </div>
                     </div>
                     <button class="btn-outline-gold w-full mt-4 py-2 rounded-full text-sm font-semibold">View Full Report</button>
@@ -753,11 +753,11 @@
                             <div class="score-ring ring-medium">65%</div>
                             <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Score</p>
                         </div>
-                        <div>
-                            <p class="text-sm"><span class="text-green-600 dark:text-green-400">✔ Correct:</span> 33</p>
-                            <p class="text-sm"><span class="text-red-500">✘ Incorrect:</span> 17</p>
-                            <p class="text-sm"><span class="text-gray-500">⏱ Time:</span> 38 min</p>
-                            <p class="text-sm"><span class="text-blue-500">⏱ Avg:</span> 0.8 min/q</p>
+                        <div class="space-y-1">
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-emerald-500 dark:text-emerald-400 font-semibold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Correct:</span> 33</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-rose-500 font-semibold flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Incorrect:</span> 17</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-gray-500 dark:text-gray-400 font-semibold flex items-center gap-1"><i class="fa-regular fa-clock"></i> Time:</span> 38 min</p>
+                            <p class="text-sm flex items-center gap-1.5"><span class="text-blue-500 font-semibold flex items-center gap-1"><i class="fa-solid fa-stopwatch"></i> Avg:</span> 0.8 min/q</p>
                         </div>
                     </div>
                     <button class="btn-outline-gold w-full mt-4 py-2 rounded-full text-sm font-semibold">View Full Report</button>
@@ -795,7 +795,7 @@
                         <div><span class="text-sm">Geography</span><div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div><span class="text-xs text-yellow-600">62%</span></div>
                         <div><span class="text-sm">Economy</span><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div><span class="text-xs text-red-500">45%</span></div>
                     </div>
-                    <p class="text-xs text-neutral-dark/40 dark:text-gray-500 mt-2">⚠️ Weak: Economy (45%) — Suggested: Review NCERT chapters 8-12</p>
+                    <p class="text-xs text-amber-500 dark:text-amber-400 font-medium mt-2 flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation"></i> Weak: Economy (45%) — Suggested: Review NCERT chapters 8-12</p>
                 </div>
                 <div class="p-4 border border-neutral-light dark:border-gray-700 rounded-xl">
                     <div class="flex justify-between items-center mb-2">
@@ -808,7 +808,7 @@
                         <div><span class="text-sm">Geometry</span><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div><span class="text-xs text-yellow-600">60%</span></div>
                         <div><span class="text-sm">Data Interpretation</span><div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div><span class="text-xs text-green-600">82%</span></div>
                     </div>
-                    <p class="text-xs text-neutral-dark/40 dark:text-gray-500 mt-2">⚠️ Weak: Algebra (55%) — Suggested: Practice linear equations &amp; quadratic</p>
+                    <p class="text-xs text-amber-500 dark:text-amber-400 font-medium mt-2 flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation"></i> Weak: Algebra (55%) — Suggested: Practice linear equations &amp; quadratic</p>
                 </div>
             </div>
         </div>
@@ -857,7 +857,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <h4 class="font-bold dark:text-white mb-3">📚 Live Classes</h4>
+                    <h4 class="font-bold dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-video text-blue-500"></i> Live Classes</h4>
                     <div class="space-y-3">
                         <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl">
                             <p class="font-medium dark:text-white">Polity: Fundamental Rights</p>
@@ -877,7 +877,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="font-bold dark:text-white mb-3">📢 Exam Notifications</h4>
+                    <h4 class="font-bold dark:text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-bullhorn text-amber-500"></i> Exam Notifications</h4>
                     <div class="space-y-3">
                         <div class="p-3 border border-neutral-light dark:border-gray-700 rounded-xl bg-neutral-light/50 dark:bg-gray-800/50">
                             <p class="font-medium dark:text-white">UPSC Prelims 2026</p>

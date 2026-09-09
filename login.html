@@ -554,7 +554,7 @@
             <i class="fas fa-moon"></i>
         </button>
         <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
-            ⇄
+            <i class="fa-solid fa-right-left"></i>
         </button>
     </div>
 
@@ -742,7 +742,7 @@
                 if (link.textContent.includes('Forgot') || link.innerHTML.includes('Forgot')) {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
-                        alert('🔐 A password reset link will be sent to your registered email address.');
+                        alert('A password reset link will be sent to your registered email address.');
                     });
                 }
             });

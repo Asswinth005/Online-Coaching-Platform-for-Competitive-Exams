@@ -484,7 +484,7 @@
             <i class="fas fa-moon"></i>
         </button>
         <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
-            ⇄
+            <i class="fa-solid fa-right-left"></i>
         </button>
     </div>
 
@@ -507,7 +507,7 @@
         </div>
 
         <!-- ===== SIGNUP FORM ===== -->
-        <form class="space-y-3" onsubmit="event.preventDefault(); alert('🎉 Welcome to PrepElite! Your account has been created.'); window.location.href='login.html';">
+        <form class="space-y-3" onsubmit="event.preventDefault(); alert('Welcome to PrepElite! Your account has been created.'); window.location.href='login.html';">
 
             <!-- Full Name -->
             <div class="relative">
@@ -685,13 +685,13 @@
             if (googleBtn) {
                 googleBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('🌊 Google sign-up demo');
+                    alert('Google sign-up is a demo feature in this preview.');
                 });
             }
             if (appleBtn) {
                 appleBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('🌊 Apple sign-up demo');
+                    alert('Apple sign-up is a demo feature in this preview.');
                 });
             }
         })();

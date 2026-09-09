@@ -430,7 +430,7 @@
     </div>
     <div class="flex items-center gap-2">
         <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-        <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+        <button id="rtl-toggle-mobile" class="toggle-btn"><i class="fa-solid fa-right-left"></i></button>
         <img src="assets/img_2.jpg" alt="Admin User" class="w-8 h-8 rounded-full object-cover object-[center_20%] border-2 border-accent-gold shadow-sm ml-1">
     </div>
 </div>
@@ -478,7 +478,7 @@
         </div>
         <div class="hidden lg:flex items-center gap-4">
             <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+            <button id="rtl-toggle" class="toggle-btn"><i class="fa-solid fa-right-left"></i></button>
             <div class="flex items-center gap-3 border-l border-neutral-light dark:border-gray-800 pl-4">
                 <img src="assets/img_2.jpg" alt="Admin User" class="w-10 h-10 rounded-full object-cover object-[center_20%] border-2 border-accent-gold shadow-sm">
                 <div class="text-left hidden lg:block">
@@ -561,10 +561,10 @@
             <div class="dashboard-card">
                 <h3 class="font-display font-bold text-lg mb-3 dark:text-white">Quick Actions</h3>
                 <div class="space-y-2">
-                    <button onclick="navigateTo('students')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">👥 View All Students</button>
-                    <button onclick="navigateTo('courses')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">📚 Manage Courses</button>
-                    <button onclick="navigateTo('tests')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">📝 Create Mock Test</button>
-                    <button onclick="navigateTo('inquiries')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white">✉️ View Inquiries (3 unread)</button>
+                    <button onclick="navigateTo('students')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white flex items-center"><i class="fa-solid fa-users text-blue-500 mr-2.5"></i>View All Students</button>
+                    <button onclick="navigateTo('courses')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white flex items-center"><i class="fa-solid fa-book-open text-emerald-500 mr-2.5"></i>Manage Courses</button>
+                    <button onclick="navigateTo('tests')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white flex items-center"><i class="fa-solid fa-file-pen text-amber-500 mr-2.5"></i>Create Mock Test</button>
+                    <button onclick="navigateTo('inquiries')" class="w-full text-left px-4 py-2 bg-neutral-light dark:bg-gray-800 rounded-xl hover:bg-accent-gold/10 transition text-sm font-medium dark:text-white flex items-center"><i class="fa-solid fa-envelope text-purple-500 mr-2.5"></i>View Inquiries (3 unread)</button>
                 </div>
             </div>
         </div>
@@ -715,7 +715,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">UPSC Prelims #12</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">GS Paper I · 100 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 2 hours</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 2 hours</p>
                         </div>
                         <span class="badge-status badge-completed">Published</span>
                     </div>
@@ -729,7 +729,7 @@
                         <div>
                             <h4 class="font-bold dark:text-white">Banking Quant #6</h4>
                             <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Quantitative Aptitude · 50 questions</p>
-                            <p class="text-xs text-accent-gold mt-1">⏱ 45 min</p>
+                            <p class="text-xs text-accent-gold mt-1 flex items-center gap-1.5"><i class="fa-regular fa-clock text-amber-400"></i> 45 min</p>
                         </div>
                         <span class="badge-status badge-pending">Draft</span>
                     </div>
