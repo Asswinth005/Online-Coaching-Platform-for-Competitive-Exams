@@ -365,6 +365,251 @@
       border-color: #D4AF37;
       box-shadow: 0 20px 40px -10px rgba(212,175,55,0.1);
     }
+
+    /* ===== MODERN TOPPER ACHIEVER CARDS (V2) ===== */
+    .topper-card-v2 {
+      background: #FFFFFF;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px -10px rgba(10, 25, 40, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+    .dark .topper-card-v2 {
+      background: #12151B;
+      border-color: rgba(212, 175, 55, 0.22);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .topper-card-v2:hover {
+      transform: translateY(-8px);
+      border-color: #D4AF37;
+      box-shadow: 0 24px 48px -12px rgba(212, 175, 55, 0.25);
+    }
+    .topper-banner {
+      height: 88px;
+      background: linear-gradient(135deg, #0A1928 0%, #162a45 60%, #D4AF37 100%);
+      position: relative;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .dark .topper-banner {
+      background: linear-gradient(135deg, #070B10 0%, #141E28 60%, #B89628 100%);
+    }
+    .topper-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.3), transparent 70%);
+      pointer-events: none;
+    }
+    .topper-avatar-wrap {
+      position: relative;
+      width: 102px;
+      height: 102px;
+      margin: -51px auto 0;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #FFE082, #D4AF37, #997819);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+      z-index: 2;
+    }
+    .topper-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      border: 3px solid #FFFFFF;
+      background: #FFFFFF;
+      transition: transform 0.3s ease;
+    }
+    .dark .topper-avatar-img {
+      border-color: #12151B;
+      background: #12151B;
+    }
+    .topper-card-v2:hover .topper-avatar-img {
+      transform: scale(1.05);
+    }
+    .topper-verified-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 26px;
+      height: 26px;
+      background: #10B981;
+      border: 2.5px solid #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+    }
+    .dark .topper-verified-badge {
+      border-color: #12151B;
+    }
+    .topper-pill-exam {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+    .topper-pill-rank {
+      background: linear-gradient(135deg, #FFE082, #D4AF37);
+      color: #0A1928;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.85rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      letter-spacing: 0.3px;
+    }
+    .topper-pill-rank.rank-1 {
+      background: linear-gradient(135deg, #FFF0A8, #E2BA38, #BF9010);
+      color: #08101C;
+      box-shadow: 0 4px 16px rgba(226, 186, 56, 0.6);
+      transform: scale(1.04);
+    }
+    .topper-quote-box {
+      position: relative;
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 0.85rem 1rem 0.85rem 2rem;
+      border-left: 3px solid #D4AF37;
+    }
+    .dark .topper-quote-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-left-color: #D4AF37;
+    }
+    .topper-quote-icon {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.65rem;
+      font-size: 0.85rem;
+      color: #D4AF37;
+      opacity: 0.7;
+    }
+    .topper-chip {
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      padding: 0.4rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1F2937;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex: 1;
+      justify-content: center;
+    }
+    .dark .topper-chip {
+      background: rgba(212, 175, 55, 0.06);
+      border-color: rgba(212, 175, 55, 0.2);
+      color: #F3F4F6;
+    }
+
+    /* ===== MODERN TRACK RECORD / PERFORMANCE (V2) ===== */
+    .track-card-v2 {
+      background: #FFFFFF;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 18px;
+      padding: 1.75rem 1.25rem;
+      position: relative;
+      text-align: center;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 25px -8px rgba(10, 25, 40, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .dark .track-card-v2 {
+      background: #12151B;
+      border-color: rgba(212, 175, 55, 0.18);
+      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.4);
+    }
+    .track-card-v2:hover {
+      transform: translateY(-8px);
+      border-color: #D4AF37;
+      box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.22);
+    }
+    .track-card-v2.highlighted {
+      border: 2px solid #D4AF37;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.04) 0%, #FFFFFF 100%);
+      box-shadow: 0 15px 35px -10px rgba(212, 175, 55, 0.28);
+    }
+    .dark .track-card-v2.highlighted {
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, #12151B 100%);
+      box-shadow: 0 15px 35px -10px rgba(212, 175, 55, 0.32);
+    }
+    .track-year-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #997819;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+    }
+    .dark .track-year-pill {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: rgba(212, 175, 55, 0.35);
+      color: #F5D77F;
+    }
+    .track-card-v2.highlighted .track-year-pill {
+      background: linear-gradient(135deg, #FFE082, #D4AF37);
+      color: #0A1928;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+    }
+    .track-progress-track {
+      width: 100%;
+      height: 7px;
+      background: #E5E7EB;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 1rem 0 0.5rem;
+    }
+    .dark .track-progress-track {
+      background: #1F2937;
+    }
+    .track-progress-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #D4AF37, #F5D77F);
+      transition: width 1s ease-in-out;
+    }
+    .track-summary-banner {
+      background: linear-gradient(135deg, #0A1928 0%, #162a45 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 20px;
+      box-shadow: 0 16px 40px -10px rgba(10, 25, 40, 0.3);
+    }
+    .dark .track-summary-banner {
+      background: linear-gradient(135deg, #080C12 0%, #121824 100%);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+    }
+
     .rank-badge {
       display: inline-block;
       background: #D4AF37;
@@ -559,127 +804,360 @@
 </section>
 
 <!-- ===== TOPPERS SHOWCASE ===== -->
-<section id="toppers" class="py-24 bg-white dark:bg-dark-bg">
-  <div class="container mx-auto px-6">
+<section id="toppers" class="py-24 bg-white dark:bg-dark-bg relative overflow-hidden">
+  <!-- Subtle ambient glow background elements -->
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
     <div class="text-center mb-16">
-      <span class="text-accent-gold font-semibold uppercase tracking-widest text-sm">toppers</span>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-gold/10 border border-accent-gold/30 text-accent-gold font-bold uppercase tracking-widest text-xs mb-3">
+        <i class="fa-solid fa-trophy"></i>
+        <span>Hall of Fame</span>
+      </div>
       <h2 class="text-3xl md:text-5xl font-display font-bold mt-2 dark:text-white">Meet Our <span class="text-accent-gold">Achievers</span></h2>
-      <p class="text-neutral-dark/60 dark:text-gray-300 max-w-2xl mx-auto mt-3">Real students who turned their dreams into reality with PrepElite.</p>
+      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto mt-3 text-base">
+        Real aspirants who turned ambition into extraordinary national milestones with PrepElite's structured coaching.
+      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Topper 1 -->
-      <div class="result-card border-accent-gold/20">
-        <img src="assets/s2.jpg" alt="Ananya Sharma" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>AIR 1</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Ananya Sharma</h3>
-        <span class="exam-tag">UPSC Civil Services 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"PrepElite's mock tests and mentorship were instrumental in my success."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 98% in Mains</span>
-          <span><i class="fas fa-star text-accent-gold"></i> Interview Topper</span>
+      <!-- Topper 1: Ananya Sharma -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-landmark mr-1 text-accent-gold"></i> UPSC CSE</span>
+          <span class="topper-pill-rank rank-1"><i class="fa-solid fa-crown text-amber-900"></i> AIR 1</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s2.jpg" alt="Ananya Sharma" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Ananya Sharma</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">UPSC Civil Services 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "PrepElite's mock test series and answer-writing mentorship were instrumental in giving me the rank 1 confidence."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>98% in Mains</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-star text-amber-500"></i>
+              <span>Interview Topper</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Topper 2 -->
-      <div class="result-card border-accent-gold/30 shadow-lg">
-        <img src="assets/s1.jpg" alt="Rahul Verma" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>AIR 3</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Rahul Verma</h3>
-        <span class="exam-tag">SBI PO 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"The live classes and doubt sessions gave me the edge I needed."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 100% in Quant</span>
-          <span><i class="fas fa-star text-accent-gold"></i> 1st Attempt</span>
+      <!-- Topper 2: Rahul Verma -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-building-columns mr-1 text-accent-gold"></i> Banking</span>
+          <span class="topper-pill-rank"><i class="fa-solid fa-medal text-primary-navy"></i> AIR 3</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s1.jpg" alt="Rahul Verma" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Rahul Verma</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">SBI PO 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "The live classes and daily quantitative aptitude doubt sessions gave me the competitive edge I truly needed."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>100% in Quant</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-bolt text-amber-500"></i>
+              <span>1st Attempt</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Topper 3 -->
-      <div class="result-card border-accent-gold/20">
-        <img src="assets/s3.jpg" alt="Priya Patel" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>AIR 7</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Priya Patel</h3>
-        <span class="exam-tag">GATE CS 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"Structured curriculum and faculty support made all the difference."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 99% in Algorithms</span>
-          <span><i class="fas fa-star text-accent-gold"></i> Rank 7</span>
+      <!-- Topper 3: Priya Patel -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-microchip mr-1 text-accent-gold"></i> GATE CS</span>
+          <span class="topper-pill-rank"><i class="fa-solid fa-medal text-primary-navy"></i> AIR 7</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s3.jpg" alt="Priya Patel" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Priya Patel</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">GATE CS &amp; IT 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "The structured curriculum, algorithm labs, and dedicated faculty support made all the difference in cracking GATE."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>99% Algorithms</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-chart-line text-amber-500"></i>
+              <span>Top 10 National</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Topper 4 -->
-      <div class="result-card border-accent-gold/20">
-        <img src="assets/s5.jpg" alt="Neha Kulkarni" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>Rank 5</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Neha Kulkarni</h3>
-        <span class="exam-tag">CLAT 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"The legal reasoning modules and mock tests were exceptional."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 97% in Legal</span>
-          <span><i class="fas fa-star text-accent-gold"></i> Top 5</span>
+      <!-- Topper 4: Neha Kulkarni -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-scale-balanced mr-1 text-accent-gold"></i> Law</span>
+          <span class="topper-pill-rank"><i class="fa-solid fa-award text-primary-navy"></i> Rank 5</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s5.jpg" alt="Neha Kulkarni" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Neha Kulkarni</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">CLAT 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "The legal reasoning modules and weekly full-length timed mock tests prepared me thoroughly for exam day pressure."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>97% in Legal</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-graduation-cap text-amber-500"></i>
+              <span>NLSIU Admitted</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Topper 5 -->
-      <div class="result-card border-accent-gold/20">
-        <img src="assets/s4.jpg" alt="Arjun Jain" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>AIR 12</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Arjun Jain</h3>
-        <span class="exam-tag">UPSC CSE 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"The essay writing practice and feedback sessions were invaluable."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 96% in Essay</span>
-          <span><i class="fas fa-star text-accent-gold"></i> Rank 12</span>
+      <!-- Topper 5: Arjun Jain -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-landmark mr-1 text-accent-gold"></i> UPSC CSE</span>
+          <span class="topper-pill-rank"><i class="fa-solid fa-medal text-primary-navy"></i> AIR 12</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s4.jpg" alt="Arjun Jain" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Arjun Jain</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">UPSC CSE 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "The analytical essay evaluation and personalized one-on-one feedback sessions transformed my score."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>96% in Essay</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-shield-halved text-amber-500"></i>
+              <span>IAS Officer</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Topper 6 -->
-      <div class="result-card border-accent-gold/20">
-        <img src="assets/s6.jpg" alt="Sneha Nair" class="topper-avatar">
-        <span class="rank-badge"><i class="fa-solid fa-medal mr-1.5"></i>Rank 2</span>
-        <h3 class="text-xl font-bold mt-3 dark:text-white">Sneha Nair</h3>
-        <span class="exam-tag">SSC CGL 2024</span>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">"The practice tests and reasoning sessions helped me crack it."</p>
-        <div class="card-footer mt-auto pt-4 flex justify-center gap-4 text-sm">
-          <span><i class="fas fa-check-circle text-accent-gold"></i> 99% in Reasoning</span>
-          <span><i class="fas fa-star text-accent-gold"></i> Rank 2</span>
+      <!-- Topper 6: Sneha Nair -->
+      <div class="topper-card-v2">
+        <div class="topper-banner">
+          <span class="topper-pill-exam"><i class="fa-solid fa-briefcase mr-1 text-accent-gold"></i> SSC CGL</span>
+          <span class="topper-pill-rank"><i class="fa-solid fa-award text-primary-navy"></i> Rank 2</span>
+        </div>
+        <div class="topper-avatar-wrap">
+          <img src="assets/s6.jpg" alt="Sneha Nair" class="topper-avatar-img">
+          <div class="topper-verified-badge" title="Verified Rank Holder">
+            <i class="fa-solid fa-check"></i>
+          </div>
+        </div>
+        <div class="p-6 pt-4 text-center flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-neutral-dark dark:text-white">Sneha Nair</h3>
+            <p class="text-xs font-semibold text-accent-gold uppercase tracking-wider mt-0.5">SSC CGL 2024</p>
+            <div class="topper-quote-box mt-4 text-left">
+              <i class="fa-solid fa-quote-left topper-quote-icon"></i>
+              <p class="text-xs text-gray-600 dark:text-gray-300 italic leading-relaxed">
+                "PrepElite's speed calculation shortcuts and reasoning workshops helped me complete the paper with full accuracy."
+              </p>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <div class="topper-chip">
+              <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              <span>99% Reasoning</span>
+            </div>
+            <div class="topper-chip">
+              <i class="fa-solid fa-briefcase text-amber-500"></i>
+              <span>Income Tax Insp.</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== YEAR-WISE RESULTS ===== -->
-<section class="py-24 bg-neutral-light dark:bg-dark-card">
+<!-- ===== YEAR-WISE RESULTS (TRACK RECORD) ===== -->
+<section class="py-24 bg-neutral-light dark:bg-dark-card border-y border-gray-200 dark:border-gray-800 relative">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
-      <span class="text-accent-gold font-semibold uppercase tracking-widest text-sm">track record</span>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-gold/10 border border-accent-gold/30 text-accent-gold font-bold uppercase tracking-widest text-xs mb-3">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Consistent Growth</span>
+      </div>
       <h2 class="text-3xl md:text-5xl font-display font-bold mt-2 dark:text-white">Year-wise <span class="text-accent-gold">Performance</span></h2>
+      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto mt-3 text-base">
+        A progressive trajectory of excellence showcasing exponential growth in student ranks and total selections year after year.
+      </p>
     </div>
-    <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-      <div class="glass-panel p-6 text-center backdrop-blur-sm">
-        <div class="text-3xl font-black text-accent-gold">2024</div>
-        <div class="text-2xl font-bold dark:text-white">12</div>
-        <div class="text-xs opacity-70">Top 10 Ranks</div>
-        <div class="text-sm mt-2 text-accent-gold font-semibold">45+ Selections</div>
+
+    <!-- 4-Year Milestone Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <!-- 2024 (Highlighted / Record Year) -->
+      <div class="track-card-v2 highlighted">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="track-year-pill"><i class="fa-solid fa-calendar-check"></i> 2024</span>
+            <span class="text-[0.65rem] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-accent-gold text-primary-navy shadow-sm">
+              Record Year
+            </span>
+          </div>
+          <div class="text-4xl font-extrabold text-neutral-dark dark:text-white mt-2">12</div>
+          <div class="text-xs font-bold text-accent-gold uppercase tracking-wider mt-1">Top 10 National Ranks</div>
+          
+          <div class="track-progress-track">
+            <div class="track-progress-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/80">
+          <div class="text-2xl font-black text-accent-gold">45+</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Final Selections</div>
+          <div class="mt-2 text-[0.7rem] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-center gap-1">
+            <i class="fa-solid fa-circle-arrow-up"></i> +18% vs 2023
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 text-center backdrop-blur-sm border-accent-gold/30">
-        <div class="text-3xl font-black text-accent-gold">2023</div>
-        <div class="text-2xl font-bold dark:text-white">8</div>
-        <div class="text-xs opacity-70">Top 10 Ranks</div>
-        <div class="text-sm mt-2 text-accent-gold font-semibold">38+ Selections</div>
+
+      <!-- 2023 -->
+      <div class="track-card-v2">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="track-year-pill"><i class="fa-solid fa-calendar"></i> 2023</span>
+            <span class="text-[0.65rem] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              High Impact
+            </span>
+          </div>
+          <div class="text-4xl font-extrabold text-neutral-dark dark:text-white mt-2">8</div>
+          <div class="text-xs font-bold text-accent-gold uppercase tracking-wider mt-1">Top 10 National Ranks</div>
+          
+          <div class="track-progress-track">
+            <div class="track-progress-fill" style="width: 84%;"></div>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/80">
+          <div class="text-2xl font-black text-accent-gold">38+</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Final Selections</div>
+          <div class="mt-2 text-[0.7rem] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-center gap-1">
+            <i class="fa-solid fa-circle-arrow-up"></i> +19% vs 2022
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 text-center backdrop-blur-sm">
-        <div class="text-3xl font-black text-accent-gold">2022</div>
-        <div class="text-2xl font-bold dark:text-white">6</div>
-        <div class="text-xs opacity-70">Top 10 Ranks</div>
-        <div class="text-sm mt-2 text-accent-gold font-semibold">32+ Selections</div>
+
+      <!-- 2022 -->
+      <div class="track-card-v2">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="track-year-pill"><i class="fa-solid fa-calendar"></i> 2022</span>
+            <span class="text-[0.65rem] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              Established
+            </span>
+          </div>
+          <div class="text-4xl font-extrabold text-neutral-dark dark:text-white mt-2">6</div>
+          <div class="text-xs font-bold text-accent-gold uppercase tracking-wider mt-1">Top 10 National Ranks</div>
+          
+          <div class="track-progress-track">
+            <div class="track-progress-fill" style="width: 71%;"></div>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/80">
+          <div class="text-2xl font-black text-accent-gold">32+</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Final Selections</div>
+          <div class="mt-2 text-[0.7rem] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-center gap-1">
+            <i class="fa-solid fa-circle-arrow-up"></i> +14% vs 2021
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 text-center backdrop-blur-sm">
-        <div class="text-3xl font-black text-accent-gold">2021</div>
-        <div class="text-2xl font-bold dark:text-white">4</div>
-        <div class="text-xs opacity-70">Top 10 Ranks</div>
-        <div class="text-sm mt-2 text-accent-gold font-semibold">28+ Selections</div>
+
+      <!-- 2021 -->
+      <div class="track-card-v2">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="track-year-pill"><i class="fa-solid fa-calendar"></i> 2021</span>
+            <span class="text-[0.65rem] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              Foundation
+            </span>
+          </div>
+          <div class="text-4xl font-extrabold text-neutral-dark dark:text-white mt-2">4</div>
+          <div class="text-xs font-bold text-accent-gold uppercase tracking-wider mt-1">Top 10 National Ranks</div>
+          
+          <div class="track-progress-track">
+            <div class="track-progress-fill" style="width: 62%;"></div>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/80">
+          <div class="text-2xl font-black text-accent-gold">28+</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Final Selections</div>
+          <div class="mt-2 text-[0.7rem] text-accent-gold font-semibold flex items-center justify-center gap-1">
+            <i class="fa-solid fa-seedling"></i> Launch Cohort
+          </div>
+        </div>
       </div>
     </div>
   </div>
