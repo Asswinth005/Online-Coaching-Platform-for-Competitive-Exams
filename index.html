@@ -356,6 +356,94 @@
     }
     .desktop-nav-container { display: flex; align-items: center; gap: 1.5rem; }
     .nav-spacing { display: flex; align-items: center; gap: 1.25rem; }
+    .faq-btn.active .fa-plus { transform: rotate(45deg); }
+
+    /* ===== PREMIUM COURSE CARDS v2 ===== */
+    .course-card-v2 {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(212,175,55,0.12);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease;
+    }
+    .dark .course-card-v2 {
+      background: #1A1A1A;
+      border-color: rgba(212,175,55,0.18);
+    }
+    .course-card-v2:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.14), 0 0 0 1px rgba(212,175,55,0.25);
+    }
+    .course-card-v2 .img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .course-card-v2 .img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .course-card-v2:hover .img-wrap img { transform: scale(1.06); }
+    .course-card-v2 .img-top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #D4AF37, #B4942C);
+    }
+    .course-card-v2 .img-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+    .course-card-v2 .img-dim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.35) 100%);
+    }
+    .course-card-v2 .body {
+      padding: 1.4rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .course-card-v2 .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .course-card-v2 .stars { color: #F59E0B; font-size: 0.78rem; }
+    .course-card-v2 .students { font-size: 0.75rem; color: #9CA3AF; }
+    .course-card-v2 .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 1.1rem;
+      padding-bottom: 0.75rem;
+      border-top: 1px solid rgba(212,175,55,0.12);
+      color: #D4AF37;
+      font-weight: 700;
+      font-size: 0.875rem;
+      transition: gap 0.25s ease, color 0.2s;
+    }
+    .dark .course-card-v2 .cta-btn { border-top-color: rgba(212,175,55,0.15); }
+    .course-card-v2:hover .cta-btn { gap: 14px; color: #B4942C; }
+    .course-stars { color: #F59E0B; font-size: 0.75rem; }
   </style>
 </head>
 <body class="exam-pattern">
@@ -487,84 +575,253 @@
   </div>
 </section>
 
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="py-20 bg-white dark:bg-dark-card border-b border-gray-100 dark:border-gray-800">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Why Choose <span class="text-accent-gold">PrepElite</span></h2>
+      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto text-base md:text-lg">The ecosystem that guarantees your selection</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center p-6 rounded-2xl hover:bg-neutral-light dark:hover:bg-dark-bg border border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition duration-300 cursor-default">
+        <div class="feature-icon bg-accent-gold/10 text-accent-gold w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl"><i class="fas fa-video"></i></div>
+        <h3 class="text-xl font-bold mb-3 dark:text-white">HD Live Classes</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Interactive dual-teacher model with instant hand-raise feature.</p>
+      </div>
+      <div class="text-center p-6 rounded-2xl hover:bg-neutral-light dark:hover:bg-dark-bg border border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition duration-300 cursor-default">
+        <div class="feature-icon bg-accent-gold/10 text-accent-gold w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl"><i class="fas fa-robot"></i></div>
+        <h3 class="text-xl font-bold mb-3 dark:text-white">AI Mock Tests</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Real exam interface with AI-driven weakness analysis.</p>
+      </div>
+      <div class="text-center p-6 rounded-2xl hover:bg-neutral-light dark:hover:bg-dark-bg border border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition duration-300 cursor-default">
+        <div class="feature-icon bg-accent-gold/10 text-accent-gold w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl"><i class="fas fa-user-graduate"></i></div>
+        <h3 class="text-xl font-bold mb-3 dark:text-white">1-on-1 Mentorship</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Dedicated ranker mentor assigned to track your daily progress.</p>
+      </div>
+      <div class="text-center p-6 rounded-2xl hover:bg-neutral-light dark:hover:bg-dark-bg border border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition duration-300 cursor-default">
+        <div class="feature-icon bg-accent-gold/10 text-accent-gold w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl"><i class="fas fa-book-open"></i></div>
+        <h3 class="text-xl font-bold mb-3 dark:text-white">Updated Material</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Daily crisp notes and current affairs PDFs aligned with latest pattern.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== COURSES SECTION ===== -->
 <section class="py-20 bg-neutral-light dark:bg-dark-bg">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-display font-bold mb-4"><span class="text-neutral-dark dark:text-white">Top</span> <span class="text-accent-gold">Courses</span></h2>
-      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto text-base md:text-lg">Live interactive classes · Recorded lectures · Practice tests</p>
+      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto text-base md:text-lg">Live interactive classes &middot; Recorded lectures &middot; Practice tests</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_20.jpg" alt="UPSC Civil Services" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">UPSC Civil Services</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Prelims + Mains + Interview guidance by ex-bureaucrats. 200+ hours of live classes.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
-        </div>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_21.jpg" alt="Banking & SSC" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <!-- Card 1 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_20.jpg" alt="UPSC Civil Services">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(212,175,55,0.22);color:#FFD87A;border:1px solid rgba(212,175,55,0.4);">
+            <i class="fas fa-landmark text-xs"></i> Gov. Services
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">Banking &amp; SSC</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Quant, Reasoning, English, GK. 5000+ practice questions with detailed solutions.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.9</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>18,200+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">UPSC Civil Services</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">Prelims + Mains + Interview guidance by ex-bureaucrats. 200+ hours of live classes.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>200+ Live Hrs</span>
+            <span><i class="fas fa-file-alt mr-1 text-accent-gold"></i>Mock Tests</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
         </div>
-      </div>
+      </a>
 
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_22.jpg" alt="GATE & Engineering" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <!-- Card 2 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_21.jpg" alt="Banking &amp; SSC">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(59,130,246,0.22);color:#93C5FD;border:1px solid rgba(59,130,246,0.4);">
+            <i class="fas fa-university text-xs"></i> Banking
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">GATE &amp; Engineering</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">CS, EC, ME, CE. Full syllabus coverage with mock tests and doubt sessions.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.8</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>24,500+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">Banking &amp; SSC</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">Quant, Reasoning, English, GK. 5000+ practice questions with detailed solutions.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>150+ Live Hrs</span>
+            <span><i class="fas fa-file-alt mr-1 text-accent-gold"></i>5000+ MCQs</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
         </div>
-      </div>
+      </a>
 
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_5.jpg" alt="Judiciary & CLAT" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <!-- Card 3 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_22.jpg" alt="GATE &amp; Engineering">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(16,185,129,0.22);color:#6EE7B7;border:1px solid rgba(16,185,129,0.4);">
+            <i class="fas fa-microchip text-xs"></i> Engineering
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">Judiciary &amp; CLAT</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Legal reasoning, constitutional law, current affairs. Ranked among top 3 coaching.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.9</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>9,800+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">GATE &amp; Engineering</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">CS, EC, ME, CE. Full syllabus coverage with mock tests and doubt sessions.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>180+ Live Hrs</span>
+            <span><i class="fas fa-file-alt mr-1 text-accent-gold"></i>Mock Tests</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
         </div>
-      </div>
+      </a>
 
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_9.jpg" alt="Data Analytics & AI" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <!-- Card 4 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_5.jpg" alt="Judiciary &amp; CLAT">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(239,68,68,0.22);color:#FCA5A5;border:1px solid rgba(239,68,68,0.35);">
+            <i class="fas fa-gavel text-xs"></i> Law &amp; CLAT
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">Data Analytics &amp; AI</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Industry-ready skills: Python, SQL, Machine Learning. Capstone projects.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.8</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>6,300+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">Judiciary &amp; CLAT</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">Legal reasoning, constitutional law, current affairs. Ranked among top 3 coaching.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>120+ Live Hrs</span>
+            <span><i class="fas fa-file-alt mr-1 text-accent-gold"></i>PYQs</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
         </div>
-      </div>
+      </a>
 
-      <div class="service-card group overflow-hidden border border-accent-gold/20 dark:border-gray-800">
-        <div class="h-44 overflow-hidden relative">
-          <img src="assets/img_23.jpg" alt="Foreign Language" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <!-- Card 5 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_9.jpg" alt="Data Analytics &amp; AI">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(168,85,247,0.22);color:#C4B5FD;border:1px solid rgba(168,85,247,0.4);">
+            <i class="fas fa-brain text-xs"></i> Tech &amp; AI
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 dark:text-white">Foreign Language</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">French, German, Spanish, Japanese. Beginner to advanced levels with certification.</p>
-          <a href="courses.html" class="inline-flex items-center text-accent-gold font-semibold text-sm hover:underline">Explore →</a>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.7</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>11,400+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">Data Analytics &amp; AI</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">Industry-ready skills: Python, SQL, Machine Learning. Capstone projects included.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>100+ Live Hrs</span>
+            <span><i class="fas fa-code mr-1 text-accent-gold"></i>Projects</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
         </div>
+      </a>
+
+      <!-- Card 6 -->
+      <a href="courses.html" class="course-card-v2 group">
+        <div class="img-wrap">
+          <div class="img-top-bar"></div>
+          <img src="assets/img_23.jpg" alt="Foreign Language">
+          <div class="img-dim"></div>
+          <div class="img-badge" style="background:rgba(234,179,8,0.2);color:#FDE68A;border:1px solid rgba(234,179,8,0.35);">
+            <i class="fas fa-globe text-xs"></i> Languages
+          </div>
+        </div>
+        <div class="body">
+          <div class="meta-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="font-bold text-neutral-dark dark:text-white text-xs ml-1">4.8</span></span>
+            <span class="students"><i class="fas fa-user-graduate mr-1"></i>5,100+ enrolled</span>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2 dark:text-white">Foreign Language</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3">French, German, Spanish, Japanese. Beginner to advanced with certification prep.</p>
+          <div class="flex gap-4 text-xs text-gray-400 dark:text-gray-500 mb-1">
+            <span><i class="fas fa-video mr-1 text-accent-gold"></i>80+ Live Hrs</span>
+            <span><i class="fas fa-certificate mr-1 text-accent-gold"></i>Certified</span>
+            <span><i class="fas fa-infinity mr-1 text-accent-gold"></i>Lifetime Access</span>
+          </div>
+          <div class="cta-btn">Explore Course <i class="fas fa-arrow-right text-xs"></i></div>
+        </div>
+      </a>
+
+    </div>
+    <div class="text-center mt-14">
+      <a href="courses.html" class="inline-flex items-center gap-2 btn-gold px-8 py-3.5 rounded-full font-semibold text-sm tracking-wide"><i class="fas fa-th-large"></i> View All Courses</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== UPCOMING BATCHES ===== -->
+<section class="py-20 bg-white dark:bg-dark-card border-t border-gray-100 dark:border-gray-800">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Upcoming <span class="text-accent-gold">Live Batches</span></h2>
+        <p class="text-neutral-dark/70 dark:text-gray-300">Join our upcoming free workshops and new batch launches.</p>
+      </div>
+      <a href="#" class="text-accent-gold font-semibold hover:underline mt-4 md:mt-0">View Full Schedule →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="batch-card border border-gray-200 dark:border-gray-700 rounded-2xl p-6 bg-neutral-light dark:bg-dark-bg relative overflow-hidden transition hover:shadow-lg hover:-translate-y-1">
+        <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">FILLING FAST</div>
+        <div class="text-accent-gold text-sm font-semibold mb-2">Starts: Oct 15, 2026</div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">UPSC Foundation 2027</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4"><i class="fas fa-clock mr-1"></i> Evening Batch (6 PM - 9 PM)</p>
+        <div class="flex items-center gap-3 mb-6">
+          <img src="assets/per2.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-accent-gold shadow" alt="Dr. Vikas Sharma">
+          <span class="text-sm font-medium dark:text-gray-300">By Dr. Vikas Sharma</span>
+        </div>
+        <button class="w-full btn-outline-gold py-2 rounded-lg">Enroll Now</button>
+      </div>
+      <div class="batch-card border border-gray-200 dark:border-gray-700 rounded-2xl p-6 bg-neutral-light dark:bg-dark-bg relative overflow-hidden transition hover:shadow-lg hover:-translate-y-1">
+        <div class="absolute top-0 right-0 bg-accent-gold text-primary-navy text-xs font-bold px-3 py-1 rounded-bl-lg">FREE DEMO</div>
+        <div class="text-accent-gold text-sm font-semibold mb-2">Oct 10, 2026 @ 5 PM</div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">Bank PO Quant Strategy</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4"><i class="fas fa-video mr-1"></i> Live Interactive Session</p>
+        <div class="flex items-center gap-3 mb-6">
+          <img src="assets/img_4.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-accent-gold shadow" alt="Prof. Meera Nair">
+          <span class="text-sm font-medium dark:text-gray-300">By Prof. Meera Nair</span>
+        </div>
+        <button class="w-full bg-primary-navy text-white dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-secondary-charcoal py-2 rounded-lg transition font-medium">Register Free</button>
+      </div>
+      <div class="batch-card border border-gray-200 dark:border-gray-700 rounded-2xl p-6 bg-neutral-light dark:bg-dark-bg relative overflow-hidden transition hover:shadow-lg hover:-translate-y-1">
+        <div class="text-accent-gold text-sm font-semibold mb-2">Starts: Oct 20, 2026</div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">SSC CGL Tier 1 Crash Course</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4"><i class="fas fa-clock mr-1"></i> Morning Batch (8 AM - 11 AM)</p>
+        <div class="flex items-center gap-3 mb-6">
+          <img src="assets/img_3.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-accent-gold shadow" alt="Amit Singh">
+          <span class="text-sm font-medium dark:text-gray-300">By Amit Singh</span>
+        </div>
+        <button class="w-full btn-outline-gold py-2 rounded-lg">Enroll Now</button>
       </div>
     </div>
   </div>
@@ -596,6 +853,7 @@
   </div>
 </section>
 
+
 <!-- ===== TESTIMONIALS ===== -->
 <section class="py-20 bg-neutral-light dark:bg-dark-bg">
   <div class="container mx-auto px-6">
@@ -626,6 +884,89 @@
         <div class="author-info mt-auto pt-4">
           <div class="font-bold dark:text-white">Priya Patel</div>
           <div class="text-sm text-gray-500">GATE 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FREE RESOURCES ===== -->
+<section class="py-20 bg-white dark:bg-dark-card border-t border-gray-100 dark:border-gray-800">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Free Learning <span class="text-accent-gold">Resources</span></h2>
+      <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">Download essential materials to kickstart your preparation.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="#" class="resource-card group flex items-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-accent-gold hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center text-xl mr-4 group-hover:scale-110 transition"><i class="fas fa-file-pdf"></i></div>
+        <div class="flex-1">
+          <h4 class="font-bold dark:text-white group-hover:text-accent-gold transition">Daily Current Affairs</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Oct 9th Update - 2MB</p>
+        </div>
+        <i class="fas fa-download text-gray-400 group-hover:text-accent-gold transition"></i>
+      </a>
+      <a href="#" class="resource-card group flex items-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-accent-gold hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mr-4 group-hover:scale-110 transition"><i class="fas fa-folder-open"></i></div>
+        <div class="flex-1">
+          <h4 class="font-bold dark:text-white group-hover:text-accent-gold transition">UPSC PYQs (2015-2023)</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">With Detailed Solutions</p>
+        </div>
+        <i class="fas fa-download text-gray-400 group-hover:text-accent-gold transition"></i>
+      </a>
+      <a href="#" class="resource-card group flex items-center p-6 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-accent-gold hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center text-xl mr-4 group-hover:scale-110 transition"><i class="fas fa-tasks"></i></div>
+        <div class="flex-1">
+          <h4 class="font-bold dark:text-white group-hover:text-accent-gold transition">SSC Syllabus Checklist</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Printable Tracker</p>
+        </div>
+        <i class="fas fa-download text-gray-400 group-hover:text-accent-gold transition"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTERACTIVE FAQ ===== -->
+<section class="py-20 bg-neutral-light dark:bg-dark-bg border-t border-gray-200 dark:border-gray-800">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Frequently Asked <span class="text-accent-gold">Questions</span></h2>
+    </div>
+    <div class="space-y-4">
+      <div class="faq-item border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-dark-card overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+        <button class="faq-btn w-full text-left px-6 py-4 font-bold flex justify-between items-center dark:text-white hover:text-accent-gold focus:outline-none transition">
+          <span>Are the classes live or recorded?</span>
+          <i class="fas fa-plus text-accent-gold transform transition-transform duration-300"></i>
+        </button>
+        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">All our batches feature live interactive classes. However, if you miss a live class, a high-quality recording is automatically made available in your dashboard within 2 hours, which you can watch unlimited times.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-dark-card overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+        <button class="faq-btn w-full text-left px-6 py-4 font-bold flex justify-between items-center dark:text-white hover:text-accent-gold focus:outline-none transition">
+          <span>How can I clear my doubts during self-study?</span>
+          <i class="fas fa-plus text-accent-gold transform transition-transform duration-300"></i>
+        </button>
+        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">We offer a 24/7 dedicated "Ask a Doubt" feature in the app. You also get assigned a personal mentor who you can connect with over chat or scheduled calls to resolve academic or strategy doubts.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-dark-card overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+        <button class="faq-btn w-full text-left px-6 py-4 font-bold flex justify-between items-center dark:text-white hover:text-accent-gold focus:outline-none transition">
+          <span>Are mock tests included in the course fee?</span>
+          <i class="fas fa-plus text-accent-gold transform transition-transform duration-300"></i>
+        </button>
+        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">Yes! Every comprehensive batch includes our elite test series featuring sectional tests, full-length mocks, and previous year papers with AI-powered detailed performance analysis.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-dark-card overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+        <button class="faq-btn w-full text-left px-6 py-4 font-bold flex justify-between items-center dark:text-white hover:text-accent-gold focus:outline-none transition">
+          <span>Can I access the content on mobile and PC?</span>
+          <i class="fas fa-plus text-accent-gold transform transition-transform duration-300"></i>
+        </button>
+        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <p class="px-6 pb-4 text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">Absolutely. You can seamlessly access your classes, notes, and tests on our Android/iOS app as well as through any web browser on your laptop or PC.</p>
         </div>
       </div>
     </div>
@@ -771,6 +1112,25 @@
           document.querySelectorAll('.mobile-dropdown-content').forEach(c => { if (c !== content) c.classList.remove('show'); });
         } else {
           icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const isActive = btn.classList.contains('active');
+        
+        // Close all others
+        document.querySelectorAll('.faq-btn').forEach(otherBtn => {
+          otherBtn.classList.remove('active');
+          otherBtn.nextElementSibling.style.maxHeight = null;
+        });
+
+        if (!isActive) {
+          btn.classList.add('active');
+          content.style.maxHeight = content.scrollHeight + "px";
         }
       });
     });
