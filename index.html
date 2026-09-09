@@ -324,20 +324,43 @@
       backdrop-filter: blur(4px);
       border: 1px solid rgba(212, 175, 55, 0.25);
     }
-    .testimonial-card {
-      background: white;
+    .testimonial-card { background: white; border-radius: 20px; padding: 1.75rem; position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.04); border-left: 4px solid #D4AF37; display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box; }
+    .dark .testimonial-card { background: #1A1A1A; border-left-color: #D4AF37; }
+
+    /* ===== TOPPER TESTIMONIAL CARDS ===== */
+    .topper-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(212,175,55,0.2);
       border-radius: 20px;
       padding: 1.75rem;
-      position: relative;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-      border-left: 4px solid #D4AF37;
+      backdrop-filter: blur(10px);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      box-sizing: border-box;
+      gap: 1rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .dark .testimonial-card { background: #1A1A1A; border-left-color: #D4AF37; }
+    .topper-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,175,55,0.55);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
+    .topper-card.featured {
+      background: rgba(212,175,55,0.1);
+      border-color: rgba(212,175,55,0.45);
+      grid-row: span 2;
+    }
+    .topper-stars { color: #F59E0B; font-size: 0.8rem; letter-spacing: 2px; }
+    .topper-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
     .social-icon {
       display: inline-flex;
       align-items: center;
@@ -861,31 +884,56 @@
       <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">What <span class="text-accent-gold">Toppers</span> Say</h2>
       <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">Real stories from students who cracked their exams</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      <div class="testimonial-card">
-        <i class="fas fa-quote-left text-accent-gold text-2xl mb-4 opacity-70"></i>
-        <p class="text-gray-700 dark:text-gray-300 mb-4">"The mock test series and personalized feedback helped me secure AIR 3 in UPSC. Grateful!"</p>
-        <div class="author-info mt-auto pt-4">
-          <div class="font-bold dark:text-white">Ananya Sharma</div>
-          <div class="text-sm text-gray-500">IAS Topper 2024</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Card 1 -->
+      <div class="bg-white dark:bg-dark-card rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col">
+        <div class="h-24 flex items-end justify-center pb-0" style="background: linear-gradient(135deg, #0A1928 0%, #1c3250 100%);">
+          <img src="assets/s6.jpg" alt="Ananya Sharma" class="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-dark-card shadow-xl translate-y-10">
+        </div>
+        <div class="pt-14 px-6 pb-6 flex flex-col items-center text-center flex-1">
+          <div class="text-amber-400 text-base mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5 italic">&ldquo;The mock test series and personalized feedback helped me secure AIR 3 in UPSC. PrepElite&rsquo;s methodology is truly world-class.&rdquo;</p>
+          <div class="mt-auto">
+            <div class="font-bold text-neutral-dark dark:text-white">Ananya Sharma</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">IAS Topper &bull; AIR 3</div>
+            <span class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold" style="background:rgba(212,175,55,0.12);color:#B4942C;">&#127963; UPSC 2024</span>
+          </div>
         </div>
       </div>
-      <div class="testimonial-card">
-        <i class="fas fa-quote-left text-accent-gold text-2xl mb-4 opacity-70"></i>
-        <p class="text-gray-700 dark:text-gray-300 mb-4">"Cracked SBI PO in first attempt. The live classes and doubt sessions were game-changers."</p>
-        <div class="author-info mt-auto pt-4">
-          <div class="font-bold dark:text-white">Rahul Verma</div>
-          <div class="text-sm text-gray-500">SBI PO 2024</div>
+
+      <!-- Card 2 -->
+      <div class="bg-white dark:bg-dark-card rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col">
+        <div class="h-24 flex items-end justify-center pb-0" style="background: linear-gradient(135deg, #1e3a5f 0%, #1D4ED8 100%);">
+          <img src="assets/s4.jpg" alt="Rahul Verma" class="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-dark-card shadow-xl translate-y-10">
+        </div>
+        <div class="pt-14 px-6 pb-6 flex flex-col items-center text-center flex-1">
+          <div class="text-amber-400 text-base mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5 italic">&ldquo;Cracked SBI PO in first attempt. The live classes and doubt sessions were absolute game-changers. Every session was packed with value.&rdquo;</p>
+          <div class="mt-auto">
+            <div class="font-bold text-neutral-dark dark:text-white">Rahul Verma</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">SBI PO &bull; First Attempt</div>
+            <span class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold" style="background:rgba(59,130,246,0.10);color:#2563EB;">&#127968; Banking 2024</span>
+          </div>
         </div>
       </div>
-      <div class="testimonial-card sm:col-span-2 lg:col-span-1">
-        <i class="fas fa-quote-left text-accent-gold text-2xl mb-4 opacity-70"></i>
-        <p class="text-gray-700 dark:text-gray-300 mb-4">"GATE CS rank 7 — the structured curriculum and faculty support made all the difference."</p>
-        <div class="author-info mt-auto pt-4">
-          <div class="font-bold dark:text-white">Priya Patel</div>
-          <div class="text-sm text-gray-500">GATE 2024</div>
+
+      <!-- Card 3 -->
+      <div class="bg-white dark:bg-dark-card rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col sm:col-span-2 lg:col-span-1">
+        <div class="h-24 flex items-end justify-center pb-0" style="background: linear-gradient(135deg, #064e3b 0%, #059669 100%);">
+          <img src="assets/s5.jpg" alt="Priya Patel" class="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-dark-card shadow-xl translate-y-10">
+        </div>
+        <div class="pt-14 px-6 pb-6 flex flex-col items-center text-center flex-1">
+          <div class="text-amber-400 text-base mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5 italic">&ldquo;GATE CS rank 7 &mdash; the structured curriculum and faculty support made all the difference. The subject-wise mock tests were incredibly thorough.&rdquo;</p>
+          <div class="mt-auto">
+            <div class="font-bold text-neutral-dark dark:text-white">Priya Patel</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">GATE CS &bull; Rank 7</div>
+            <span class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold" style="background:rgba(16,185,129,0.10);color:#059669;">&#128187; GATE 2024</span>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
