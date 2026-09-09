@@ -599,7 +599,11 @@
         </div>
 
         <!-- ===== LOGIN FORM ===== -->
-        <form class="space-y-5" action="index.html" method="GET">
+        <form class="space-y-5" onsubmit="event.preventDefault(); window.location.href='index.html';">
+            <!-- Demo Mode Notice -->
+            <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-center text-xs text-amber-600 dark:text-amber-400">
+                <i class="fa-solid fa-circle-info mr-1"></i> Student Demo Portal · Any credentials work
+            </div>
 
             <!-- Email field -->
             <div class="relative">
