@@ -452,6 +452,25 @@
       .comparison-row { grid-template-columns: 1fr 1fr 1fr; font-size: 0.8rem; }
       .comparison-row .col:first-child { grid-column: 1 / -1; text-align: center; padding-bottom: 0.25rem; }
     }
+
+    /* FAQ Styles */
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(90deg);
+    }
   </style>
 </head>
 <body class="exam-pattern">
@@ -758,21 +777,37 @@
       <h2 class="text-3xl md:text-5xl font-display font-bold mt-2 dark:text-white">Frequently Asked <span class="text-accent-gold">Questions</span></h2>
     </div>
     <div class="max-w-3xl mx-auto space-y-4">
-      <div class="glass-panel p-6 backdrop-blur-sm">
-        <h4 class="font-bold dark:text-white"><i class="fas fa-chevron-right text-accent-gold mr-2"></i> Are there any hidden charges?</h4>
-        <p class="text-sm opacity-80 dark:opacity-70 mt-1 ml-6">No. The price you see is the price you pay. All taxes included.</p>
+      <div class="glass-panel p-6 backdrop-blur-sm faq-item cursor-pointer">
+        <h4 class="font-bold dark:text-white flex items-center"><i class="fas fa-chevron-right text-accent-gold mr-3 faq-icon"></i> Are there any hidden charges?</h4>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p class="text-sm opacity-80 dark:opacity-70 mt-3 ml-7">No. The price you see is the price you pay. All taxes included.</p>
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 backdrop-blur-sm">
-        <h4 class="font-bold dark:text-white"><i class="fas fa-chevron-right text-accent-gold mr-2"></i> Can I switch plans mid-course?</h4>
-        <p class="text-sm opacity-80 dark:opacity-70 mt-1 ml-6">Yes, you can upgrade or downgrade your plan at any time. Adjustments are prorated.</p>
+      <div class="glass-panel p-6 backdrop-blur-sm faq-item cursor-pointer">
+        <h4 class="font-bold dark:text-white flex items-center"><i class="fas fa-chevron-right text-accent-gold mr-3 faq-icon"></i> Can I switch plans mid-course?</h4>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p class="text-sm opacity-80 dark:opacity-70 mt-3 ml-7">Yes, you can upgrade or downgrade your plan at any time. Adjustments are prorated.</p>
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 backdrop-blur-sm">
-        <h4 class="font-bold dark:text-white"><i class="fas fa-chevron-right text-accent-gold mr-2"></i> Is there a free trial available?</h4>
-        <p class="text-sm opacity-80 dark:opacity-70 mt-1 ml-6">Yes! We offer a 7-day free trial for all courses. No credit card required.</p>
+      <div class="glass-panel p-6 backdrop-blur-sm faq-item cursor-pointer">
+        <h4 class="font-bold dark:text-white flex items-center"><i class="fas fa-chevron-right text-accent-gold mr-3 faq-icon"></i> Is there a free trial available?</h4>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p class="text-sm opacity-80 dark:opacity-70 mt-3 ml-7">Yes! We offer a 7-day free trial for all courses. No credit card required.</p>
+          </div>
+        </div>
       </div>
-      <div class="glass-panel p-6 backdrop-blur-sm">
-        <h4 class="font-bold dark:text-white"><i class="fas fa-chevron-right text-accent-gold mr-2"></i> What payment methods are accepted?</h4>
-        <p class="text-sm opacity-80 dark:opacity-70 mt-1 ml-6">Credit/Debit cards, UPI, Net Banking, and EMI options available.</p>
+      <div class="glass-panel p-6 backdrop-blur-sm faq-item cursor-pointer">
+        <h4 class="font-bold dark:text-white flex items-center"><i class="fas fa-chevron-right text-accent-gold mr-3 faq-icon"></i> What payment methods are accepted?</h4>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p class="text-sm opacity-80 dark:opacity-70 mt-3 ml-7">Credit/Debit cards, UPI, Net Banking, and EMI options available.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -918,6 +953,17 @@
           document.querySelectorAll('.mobile-dropdown-content').forEach(c => { if (c !== content) c.classList.remove('show'); });
         } else {
           icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+    // FAQ toggles
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(faq => faq.classList.remove('open'));
+        if (!isOpen) {
+          item.classList.add('open');
         }
       });
     });

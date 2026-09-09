@@ -424,6 +424,15 @@
     .dark .feature-tag {
       background: rgba(212,175,55,0.12);
     }
+    .feature-tag.active {
+      background-color: #D4AF37 !important;
+      color: #0A1928 !important;
+      border-color: #D4AF37 !important;
+    }
+    .dark .feature-tag.active {
+      background-color: #D4AF37 !important;
+      color: #0A1928 !important;
+    }
   </style>
 </head>
 <body class="exam-pattern">
@@ -562,7 +571,7 @@
 
     <!-- Filter chips (static) -->
     <div class="flex flex-wrap justify-center gap-3 mb-12">
-      <span class="feature-tag bg-accent-gold text-primary-navy border-accent-gold">All</span>
+      <span class="feature-tag active">All</span>
       <span class="feature-tag">UPSC</span>
       <span class="feature-tag">Banking</span>
       <span class="feature-tag">SSC</span>
