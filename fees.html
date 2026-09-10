@@ -200,20 +200,32 @@
     .dark .dropdown-item:hover { background: #2D3A46; }
 
     .auth-btn {
-      padding: 0.5rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      padding: 0.55rem 1.4rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: 1px solid transparent;
       white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
     }
-    .auth-btn.login {
-      background: transparent;
-      border-color: #D1D5DB;
-      color: #1E2A36;
+    .auth-btn.login, .auth-btn.signin {
+      background: linear-gradient(135deg, #D4AF37 0%, #B4942C 100%);
+      color: #0A1928;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
     }
-    .dark .auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
-    .auth-btn.login:hover { border-color: #D4AF37; color: #D4AF37; }
+    .dark .auth-btn.login, .dark .auth-btn.signin {
+      color: #0A1928;
+      border-color: transparent;
+    }
+    .auth-btn.login:hover, .auth-btn.signin:hover {
+      background: linear-gradient(135deg, #E5C158 0%, #C5A038 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      color: #0A1928;
+    }
     .auth-btn.signup {
       background: #D4AF37;
       color: #0A1928;
@@ -282,22 +294,31 @@
     }
 
     .mobile-auth-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       padding: 0.75rem 1.5rem;
-      font-weight: 500;
-      border-radius: 8px;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       text-align: center;
-      margin: 0.25rem;
       border: 1px solid transparent;
+      font-size: 0.95rem;
     }
-    .mobile-auth-btn.login {
-      background: transparent;
-      border-color: #D1D5DB;
-      color: #1E2A36;
+    .mobile-auth-btn.login, .mobile-auth-btn.signin {
+      background: linear-gradient(135deg, #D4AF37 0%, #B4942C 100%);
+      color: #0A1928;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
     }
-    .dark .mobile-auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
-    .mobile-auth-btn.login:hover { background-color: #D4AF37; color: white; border-color: #D4AF37; }
+    .dark .mobile-auth-btn.login, .dark .mobile-auth-btn.signin {
+      color: #0A1928;
+      border-color: transparent;
+    }
+    .mobile-auth-btn.login:hover, .mobile-auth-btn.signin:hover {
+      background: linear-gradient(135deg, #E5C158 0%, #C5A038 100%);
+      color: #0A1928;
+    }
     .mobile-auth-btn.signup { background: #D4AF37; color: #0A1928; }
     .mobile-auth-btn.signup:hover { background: #B4942C; }
 
@@ -543,10 +564,9 @@
             <button id="theme-toggle" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
             <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR"><i class="fa-solid fa-right-left"></i></button>
           </div>
-          <!-- Auth buttons -->
-          <div class="flex items-center gap-3">
-            <a class="auth-btn login" href="login.html">Login</a>
-            <a class="auth-btn signup" href="signup.html">Sign Up</a>
+          <!-- Auth CTA -->
+          <div class="flex items-center">
+            <a class="auth-btn signin" href="login.html">Sign In</a>
           </div>
         </div>
       </div>
@@ -583,9 +603,8 @@
         <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
         <button id="rtl-toggle-mobile" class="toggle-btn"><i class="fa-solid fa-right-left"></i></button>
       </div>
-      <div class="flex flex-col sm:flex-row gap-3 p-6 pt-0">
-        <a class="mobile-auth-btn login flex-1 text-center" href="login.html">Login</a>
-        <a class="mobile-auth-btn signup flex-1 text-center" href="signup.html">Sign Up</a>
+      <div class="p-6 pt-0">
+        <a class="mobile-auth-btn signin w-full text-center" href="login.html">Sign In</a>
       </div>
     </div>
   </div>
