@@ -393,6 +393,7 @@
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
+      cursor: pointer;
     }
     @media (min-width: 1024px) {
       .pricing-card {
@@ -644,11 +645,11 @@
       <p class="text-neutral-dark/60 dark:text-gray-300 max-w-2xl mx-auto mt-3">Flexible options designed for every budget and learning need.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:gap-8 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:gap-8 max-w-6xl mx-auto items-stretch">
       <!-- Starter -->
-      <div class="pricing-card">
+      <div class="pricing-card cursor-pointer group" onclick="if(!event.target.closest('a')) window.location.href='signup.html'">
         <h3 class="text-xl font-bold dark:text-white">Starter</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Perfect for beginners</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 min-h-[40px] flex items-center justify-center">Perfect for beginners</p>
         <div class="mt-4">
           <span class="price-number">₹9,999</span>
           <span class="text-sm text-gray-500 dark:text-gray-400">/course</span>
@@ -661,13 +662,13 @@
           <li class="text-gray-400 dark:text-gray-500"><i class="fas fa-times text-gray-400 mr-2"></i> Live Doubt Sessions</li>
           <li class="text-gray-400 dark:text-gray-500"><i class="fas fa-times text-gray-400 mr-2"></i> Mock Tests</li>
         </ul>
-        <a href="#" class="btn-ghost-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center">Get Started</a>
+        <a href="signup.html" class="btn-ghost-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center group-hover:bg-accent-gold group-hover:text-primary-navy transition">Get Started</a>
       </div>
 
       <!-- Pro (Popular) -->
-      <div class="pricing-card popular lg:scale-105 relative z-10">
+      <div class="pricing-card popular relative z-10 cursor-pointer group" onclick="if(!event.target.closest('a')) window.location.href='signup.html'">
         <h3 class="text-xl font-bold dark:text-white">Pro</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Best value for serious aspirants</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 min-h-[40px] flex items-center justify-center">Best value for serious aspirants</p>
         <div class="mt-4">
           <span class="price-number">₹24,999</span>
           <span class="text-sm text-gray-500 dark:text-gray-400">/course</span>
@@ -680,13 +681,13 @@
           <li><i class="fas fa-check feature-check"></i> Full Mock Test Series</li>
           <li><i class="fas fa-check feature-check"></i> Personalized Feedback</li>
         </ul>
-        <a href="#" class="btn-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center">Enroll Now</a>
+        <a href="signup.html" class="btn-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center shadow-lg group-hover:shadow-accent-gold/40 transition">Enroll Now</a>
       </div>
 
       <!-- Elite -->
-      <div class="pricing-card">
+      <div class="pricing-card cursor-pointer group" onclick="if(!event.target.closest('a')) window.location.href='contact.html'">
         <h3 class="text-xl font-bold dark:text-white">Elite</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">For those who want it all</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 min-h-[40px] flex items-center justify-center">For those who want it all</p>
         <div class="mt-4">
           <span class="price-number">₹39,999</span>
           <span class="text-sm text-gray-500 dark:text-gray-400">/year</span>
@@ -699,7 +700,7 @@
           <li><i class="fas fa-check feature-check"></i> Unlimited Mock Tests</li>
           <li><i class="fas fa-check feature-check"></i> Career Guidance &amp; Placement</li>
         </ul>
-        <a href="#" class="btn-ghost-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center">Contact Sales</a>
+        <a href="contact.html" class="btn-ghost-gold w-full py-3 rounded-full text-sm font-semibold mt-6 inline-block text-center group-hover:bg-accent-gold group-hover:text-primary-navy transition">Contact Sales</a>
       </div>
     </div>
   </div>

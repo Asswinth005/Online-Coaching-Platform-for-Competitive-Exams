@@ -165,6 +165,22 @@
                 top: 50% !important;
                 transform: translateY(-50%) !important;
             }
+            [dir="rtl"] .input-icon {
+                left: auto !important;
+                right: 0 !important;
+            }
+            [dir="rtl"] .signup-input {
+                padding: 0.65rem 3.1rem 0.65rem 1rem !important;
+                text-align: right !important;
+            }
+            [dir="rtl"] .password-wrapper .signup-input {
+                padding: 0.65rem 3.1rem 0.65rem 3.1rem !important;
+                text-align: right !important;
+            }
+            [dir="rtl"] .toggle-password {
+                right: auto !important;
+                left: 0.85rem !important;
+            }
             .space-y-3 > :not([hidden]) ~ :not([hidden]) {
                 margin-top: 0.45rem !important;
             }
@@ -188,6 +204,10 @@
                 top: 10px !important;
                 right: 10px !important;
                 transform: scale(0.9);
+            }
+            [dir="rtl"] .theme-toggle-wrapper {
+                right: auto !important;
+                left: 10px !important;
             }
         }
 
@@ -363,7 +383,8 @@
             right: 0;
         }
         [dir="rtl"] .signup-input {
-            padding: 0 3rem 0 1.2rem;
+            padding: 0 3.25rem 0 1.25rem;
+            text-align: right;
         }
 
         .relative {
@@ -376,11 +397,13 @@
             width: 100%;
         }
         .password-wrapper .signup-input {
-            padding-right: 3rem;
+            padding-left: 3.25rem;
+            padding-right: 3.25rem;
         }
         [dir="rtl"] .password-wrapper .signup-input {
-            padding-right: 1.2rem;
-            padding-left: 3rem;
+            padding-right: 3.25rem !important;
+            padding-left: 3.25rem !important;
+            text-align: right;
         }
 
         .toggle-password {
@@ -480,6 +503,9 @@
         .dark .terms-text {
             color: #9CA3AF;
         }
+        [dir="rtl"] .terms-text {
+            text-align: right;
+        }
         .link-gold {
             color: #D4AF37;
             font-weight: 500;
@@ -513,8 +539,8 @@
 
         <!-- ===== LOGO - CENTERED ===== -->
         <div class="logo-center">
-            <a href="index.html" class="flex items-center space-x-3 group">
-                <div class="w-11 h-11 bg-[#D4AF37] rounded-xl flex items-center justify-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 bg-[#D4AF37] rounded-xl flex items-center justify-center flex-shrink-0">
                     <i class="fas fa-graduation-cap text-[#0A1928] text-xl"></i>
                 </div>
                 <div>
@@ -568,17 +594,17 @@
             </div>
 
             <!-- Terms & Conditions -->
-            <div class="flex items-start space-x-2 rtl:space-x-reverse pt-0.5">
-                <input type="checkbox" id="terms" class="gold-checkbox mt-0.5" required>
-                <label for="terms" class="terms-text">
+            <div class="flex items-start gap-2.5 pt-0.5">
+                <input type="checkbox" id="terms" class="gold-checkbox mt-0.5 flex-shrink-0" required>
+                <label for="terms" class="terms-text text-start">
                     I agree to the <a href="#" class="link-gold">Terms of Service</a> and <a href="#" class="link-gold">Privacy Policy</a>
                 </label>
             </div>
 
             <!-- SIGN UP BUTTON WITH RIGHT-SIDE ICON -->
-            <button type="submit" class="btn-gold mt-2">
-                Create Account
-                <i class="fas fa-user-plus ml-2 rtl:mr-2 rtl:ml-0 text-sm"></i>
+            <button type="submit" class="btn-gold mt-2 flex items-center justify-center gap-2">
+                <span>Create Account</span>
+                <i class="fas fa-user-plus text-sm"></i>
             </button>
         </form>
 
@@ -589,20 +615,20 @@
 
         <!-- ===== SOCIAL BUTTONS ===== -->
         <div class="grid grid-cols-2 gap-3">
-            <button class="social-btn" id="googleSignupBtn">
+            <button class="social-btn flex items-center justify-center gap-2.5" id="googleSignupBtn">
                 <i class="fab fa-google"></i>
                 <span>Google</span>
             </button>
-            <button class="social-btn" id="appleSignupBtn">
+            <button class="social-btn flex items-center justify-center gap-2.5" id="appleSignupBtn">
                 <i class="fab fa-apple"></i>
                 <span>Apple</span>
             </button>
         </div>
 
         <!-- ===== LOGIN LINK ===== -->
-        <div class="mt-4 text-center pt-3 border-t border-[#E5E7EB] dark:border-[#2D3A46]">
-            <span class="text-xs text-gray-500 dark:text-gray-400">Already have an account?</span>
-            <a href="login.html" class="text-xs font-semibold link-gold transition ml-1 rtl:mr-1">
+        <div class="mt-4 text-center pt-3 border-t border-[#E5E7EB] dark:border-[#2D3A46] flex items-center justify-center gap-1.5 text-xs">
+            <span class="text-gray-500 dark:text-gray-400">Already have an account?</span>
+            <a href="login.html" class="font-semibold link-gold transition">
                 Sign In
             </a>
         </div>
